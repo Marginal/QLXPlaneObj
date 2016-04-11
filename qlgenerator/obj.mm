@@ -146,9 +146,9 @@ static	ObjDrawFuncs10_t sCallbacks =
             return NULL;
         }
         info.lighting = -1;
-        info.tex = LoadTex(objfile, mObj8.texture.c_str(), &info.texdata);
-        info.drp = LoadTex(objfile, mObj8.texture_draped.c_str(), &info.drpdata);
-        info.pan = LoadTex(objfile, "cockpit_3d/-PANELS-/Panel_Preview.png", &info.pandata);
+        info.tex = LoadTex(kTexPrimaryRole, objfile, mObj8.texture.c_str());
+        info.drp = LoadTex(kTexDrapedRole, objfile, mObj8.texture_draped.c_str());
+        info.pan = LoadTex(kTexPanelRole, objfile, "cockpit_3d/-PANELS-/Panel_Preview.png");
         ObjDraw8(mObj8, 0.f, &sCallbacks, &info);
     }
     else
@@ -162,16 +162,11 @@ static	ObjDrawFuncs10_t sCallbacks =
             return NULL;
         }
         info.lighting = 0;  // No normals -> no lighting
-        info.tex = LoadTex(objfile, mObj.texture.c_str(), &info.texdata);
-        info.pan = LoadTex(objfile, "cockpit_3d/-PANELS-/Panel_Preview.png", &info.pandata);
+        info.tex = LoadTex(kTexPrimaryRole, objfile, mObj.texture.c_str());
+        info.pan = LoadTex(kTexPanelRole, objfile, "cockpit_3d/-PANELS-/Panel_Preview.png");
         ObjDraw(mObj, 0.f, &sCallbacks, &info);
     }
     ASSERT_GL;
-
-    // Clean up
-    if (info.tex) { glDeleteTextures(1, &info.tex); CFRelease(info.texdata); }
-    if (info.drp) { glDeleteTextures(1, &info.drp); CFRelease(info.drpdata); }
-    if (info.pan) { glDeleteTextures(1, &info.pan); CFRelease(info.pandata); }
 
 #if APL
     UInt32 *img_data;

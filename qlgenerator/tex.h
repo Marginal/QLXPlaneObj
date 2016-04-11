@@ -13,6 +13,16 @@
 
 #include "dds.h"
 
-GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data);
+
+typedef enum
+{
+    kTexPrimaryRole	= 0,
+    kTexPanelRole	= 1,
+    kTexDrapedRole	= 2,
+    kTexRoleCount	= 3,
+} TexRole;
+
+
+GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname);
 
 #endif /* tex_h */

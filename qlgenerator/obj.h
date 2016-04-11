@@ -27,7 +27,6 @@ struct DrawInfo_t
 {
     GLboolean lighting;
     GLuint tex, drp, pan;
-    CFDataRef texdata, drpdata, pandata;
 };
 
 

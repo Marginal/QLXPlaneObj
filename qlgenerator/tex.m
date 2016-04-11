@@ -23,10 +23,17 @@ static const unsigned int FOURCC_DXT5 = 0x35545844;
 #include "context.h"
 
 
-GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data)
+// Cache
+GLenum targets[kTexRoleCount];
+NSURL *filenames[kTexRoleCount];
+#if APL
+CFDataRef *data[kTexRoleCount];   // We're using GL_UNPACK_CLIENT_STORAGE_APPLE so need to retain the source bitmap data
+#endif
+
+
+GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
 {
-    *data = NULL;
-    if (! *texname)
+    if (! *texname || role >= kTexRoleCount)
         return 0;
 
     char *fixedname;
@@ -48,10 +55,18 @@ GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data)
     NSURL *basename = [[[(__bridge NSURL*) objname URLByDeletingLastPathComponent] URLByAppendingPathComponent:[NSString stringWithUTF8String:fixedname]] URLByDeletingPathExtension];
     free(fixedname);
 
+    // cached?
+    NSURL *ddsfilename = [basename URLByAppendingPathExtension:@"dds"];
+    NSURL *pngfilename = [basename URLByAppendingPathExtension:@"png"];
+    if (role < kTexRoleCount &&
+        targets[role] &&
+        ([filenames[role] isEqual:ddsfilename] || [filenames[role] isEqual:pngfilename]))
+        return targets[role];
+
 #if APL
     // DDS loader - assumes little-endian machine so we can cast memory to struct
     DDS_header *ddsheader;
-    NSData *ddsfile = [NSData dataWithContentsOfURL:[basename URLByAppendingPathExtension:@"dds"]];
+    NSData *ddsfile = [NSData dataWithContentsOfURL:ddsfilename];
     if (ddsfile &&
         ddsfile.length > sizeof(DDS_header) &&
         (ddsheader = (DDS_header *) ddsfile.bytes) &&
@@ -88,9 +103,15 @@ GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data)
         GLsizei mipmaps = MAX(1, ddsheader->dwMipMapCount);   // according to http://msdn.microsoft.com/en-us/library/bb943982 we ignore DDSD_MIPMAPCOUNT in dwFlags
         const char *ddsdata = (char *) ddsfile.bytes + sizeof(DDS_header);
 
-        GLuint texno;
-        glGenTextures(1, &texno);
-        glBindTexture(GL_TEXTURE_2D, texno);
+        if (targets[role])
+        {
+            filenames[role] = ddsfilename;
+            CFRelease(data[role]);
+        }
+        else
+            glGenTextures(1, &targets[role]);
+
+        glBindTexture(GL_TEXTURE_2D, targets[role]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         if (mipmaps > 1)
@@ -111,12 +132,12 @@ GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data)
             if (! (width /= 2))  width  = 1;
             if (! (height /= 2)) height = 1;
         }
-        *data = CFBridgingRetain(ddsfile);  // keep a copy of the data
-        return texno;
+        data[role] = CFBridgingRetain(ddsfile);  // keep a copy of the data
+        return targets[role];
     }
 
 #else
-    DDS *dds = [DDS ddsWithURL: [basename URLByAppendingPathExtension:@"dds"]];
+    DDS *dds = [DDS ddsWithURL:ddsfilename];
     if (dds)
     {
         GLsizei width = dds.mainSurfaceWidth;
@@ -128,25 +149,26 @@ GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data)
             return 0;
         [dds DecodeSurface:0 atLevel:0 To:(UInt32*)uncompressed withStride:width];  // Ignore any mipmaps
 
-        GLuint texno;
-        glGenTextures(1, &texno);
-        glBindTexture(GL_TEXTURE_2D, texno);
+        if (targets[role])
+            filenames[role] = ddsfilename;
+        else
+            glGenTextures(1, &targets[role]);
+
+        glBindTexture(GL_TEXTURE_2D, targets[role]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, uncompressed);
 
-        // Wrap in a CFData for later freeing
-        *data = CFDataCreateWithBytesNoCopy(NULL, uncompressed, width * height * 4, kCFAllocatorMalloc);
-        return texno;
+        return targets[role];
     }
 #endif
 
     // PNG loader
     // https://developer.apple.com/library/mac/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_texturedata/opengl_texturedata.html
 
-    CGImageSourceRef imagesource = CGImageSourceCreateWithURL((__bridge CFURLRef) [basename URLByAppendingPathExtension:@"png"], NULL);
+    CGImageSourceRef imagesource = CGImageSourceCreateWithURL((__bridge CFURLRef) pngfilename, NULL);
     if (!imagesource)
         return 0;
 
@@ -155,29 +177,51 @@ GLuint LoadTex(CFURLRef objname, const char *texname, CFDataRef *data)
     if (!image)
         return 0;
 
-    *data = CGDataProviderCopyData(CGImageGetDataProvider(image));
+    CFDataRef pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image));
     CGImageRelease(image);
-    if (!*data)
-    {
+    if (!pngdata)
         return 0;
-    }
 
 #if DEBUG
     CGImageAlphaInfo alphainfo = CGImageGetAlphaInfo(image);
     CGBitmapInfo bitmapinfo = CGImageGetBitmapInfo(image);
     size_t bpp = CGImageGetBitsPerPixel(image);
-    const UInt8 *pixdata = CFDataGetBytePtr(*data);
+    const UInt8 *pixdata = CFDataGetBytePtr(pngdata);
 #endif
 
-    GLuint texno;
-    glGenTextures(1, &texno);
-    glBindTexture(GL_TEXTURE_2D, texno);
+    if (targets[role])
+    {
+        filenames[role] = ddsfilename;
+#if APL
+        CFRelease(data[role]);
+#endif
+    }
+    else
+        glGenTextures(1, &targets[role]);
+
+    glBindTexture(GL_TEXTURE_2D, targets[role]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CGImageGetWidth(image), CGImageGetHeight(image), 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, CFDataGetBytePtr(*data));
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CGImageGetWidth(image), CGImageGetHeight(image), 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, CFDataGetBytePtr(pngdata));
     ASSERT_GL;
 
-    return texno;
+#if APL
+    data[role] = CFBridgingRetain(pngdata);  // keep a copy of the data
+#endif
+    return targets[role];
+}
+
+
+void ClearCache()
+{
+    for (int i=0; i<kTexRoleCount; i++)
+        if (targets[i])
+        {
+            glDeleteTextures(1, &targets[i]);
+#if APL
+            CFRelease(data[i]);
+#endif
+        }
 }
