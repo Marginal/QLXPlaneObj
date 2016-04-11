@@ -34,7 +34,11 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
         }
 
         NSNumber *scaleFactor = ((__bridge NSDictionary *) options)[(NSString *) kQLThumbnailOptionScaleFactorKey];	// can be >1 on Retina displays
-        CGSize size = scaleFactor.floatValue ? CGSizeMake(maxSize.width * scaleFactor.floatValue, maxSize.height * scaleFactor.floatValue) : CGSizeMake(maxSize.width, maxSize.height);
+
+        // Render at double size so QuickLook will effectively antialias by resizing
+        CGSize size = (scaleFactor.floatValue ?
+                       CGSizeMake(maxSize.width * scaleFactor.floatValue * 2, maxSize.height * scaleFactor.floatValue * 2) :
+                       CGSizeMake(maxSize.width * 2, maxSize.height * 2));
 
         CGImageRef image = [obj CreateImageWithSize:size];
         if (!image || QLThumbnailRequestIsCancelled(thumbnail))
