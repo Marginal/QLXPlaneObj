@@ -1,0 +1,10 @@
+Build
+.DS_Store
+*.mode1
+*.mode1v3
+*.pbxuser
+!default.pbxuser
+*.xcworkspace
+xcuserdata
+*.bak
+*.pkg

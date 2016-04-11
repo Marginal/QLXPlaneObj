@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB6DA8EC1CB603ED000279A4 /* obj.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA8EB1CB603ED000279A4 /* obj.mm */; };
+		AB6DA9111CB690F1000279A4 /* ObjDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA9031CB690F1000279A4 /* ObjDraw.cpp */; };
+		AB6DA9121CB690F1000279A4 /* ObjPointPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA9051CB690F1000279A4 /* ObjPointPool.cpp */; };
+		AB6DA9141CB690F1000279A4 /* XObjDefs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA90A1CB690F1000279A4 /* XObjDefs.cpp */; };
+		AB6DA9151CB690F1000279A4 /* XObjReadWrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA90C1CB690F1000279A4 /* XObjReadWrite.cpp */; };
+		AB6DA91B1CB6CF68000279A4 /* tex.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA9191CB6CF68000279A4 /* tex.m */; };
+		AB6DA91E1CB7D8D7000279A4 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA91C1CB7D8D7000279A4 /* context.c */; };
+		AB6DA9211CB8287B000279A4 /* ObjUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA91F1CB8287B000279A4 /* ObjUtils.cpp */; };
+		AB6DA9271CB82F88000279A4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8A4A961A22FAED002E5A59 /* CoreFoundation.framework */; };
+		AB6DA9281CB82F98000279A4 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8A4AD81A22FD09002E5A59 /* ApplicationServices.framework */; };
+		AB6DA9291CB82FB3000279A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB60480E1A2691E900D39FDE /* Foundation.framework */; };
+		AB6DA9301CB94163000279A4 /* glu.c in Sources */ = {isa = PBXBuildFile; fileRef = AB6DA92E1CB94163000279A4 /* glu.c */; };
+		AB9D8A671CBA0FD40004A0D3 /* dds.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9D8A661CBA0FD40004A0D3 /* dds.m */; };
+		AB9D8A7B1CBBF44A0004A0D3 /* libOSMesa.8.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB6DA9341CB9D778000279A4 /* libOSMesa.8.dylib */; };
+		AB9D8A7C1CBBF44E0004A0D3 /* libglapi.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB7008271CB9E08F00D36CC9 /* libglapi.0.dylib */; };
+		AB9D8A7E1CBC0DE50004A0D3 /* libglapi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7008271CB9E08F00D36CC9 /* libglapi.0.dylib */; };
+		AB9D8A7F1CBC0DEA0004A0D3 /* libOSMesa.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6DA9341CB9D778000279A4 /* libOSMesa.8.dylib */; };
+		ABAB4A381A238A7B00B1BD18 /* GenerateThumbnailForURL.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB8A4A2E1A22DFB6002E5A59 /* GenerateThumbnailForURL.mm */; };
+		ABAB4A391A238A8000B1BD18 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = AB8A4A301A22DFB6002E5A59 /* main.c */; };
+		ABAB4A3A1A238A8400B1BD18 /* GeneratePreviewForURL.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB8A4A2D1A22DFB6002E5A59 /* GeneratePreviewForURL.mm */; };
+		ABD434BF1A2D6AF900ED8B26 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8A4AA41A22FBB0002E5A59 /* QuickLook.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB6DA9371CB9D985000279A4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AB9D8A7B1CBBF44A0004A0D3 /* libOSMesa.8.dylib in CopyFiles */,
+				AB9D8A7C1CBBF44E0004A0D3 /* libglapi.0.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB60480E1A2691E900D39FDE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AB6DA8EB1CB603ED000279A4 /* obj.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = obj.mm; sourceTree = "<group>"; };
+		AB6DA8ED1CB60415000279A4 /* obj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj.h; sourceTree = "<group>"; };
+		AB6DA8EE1CB60C27000279A4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		AB6DA9011CB690F1000279A4 /* ObjConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjConvert.cpp; sourceTree = "<group>"; };
+		AB6DA9021CB690F1000279A4 /* ObjConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjConvert.h; sourceTree = "<group>"; };
+		AB6DA9031CB690F1000279A4 /* ObjDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjDraw.cpp; sourceTree = "<group>"; };
+		AB6DA9041CB690F1000279A4 /* ObjDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjDraw.h; sourceTree = "<group>"; };
+		AB6DA9051CB690F1000279A4 /* ObjPointPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjPointPool.cpp; sourceTree = "<group>"; };
+		AB6DA9061CB690F1000279A4 /* ObjPointPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjPointPool.h; sourceTree = "<group>"; };
+		AB6DA9071CB690F1000279A4 /* XDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDefs.h; sourceTree = "<group>"; };
+		AB6DA9081CB690F1000279A4 /* XObjBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XObjBuilder.cpp; sourceTree = "<group>"; };
+		AB6DA9091CB690F1000279A4 /* XObjBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XObjBuilder.h; sourceTree = "<group>"; };
+		AB6DA90A1CB690F1000279A4 /* XObjDefs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XObjDefs.cpp; sourceTree = "<group>"; };
+		AB6DA90B1CB690F1000279A4 /* XObjDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XObjDefs.h; sourceTree = "<group>"; };
+		AB6DA90C1CB690F1000279A4 /* XObjReadWrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XObjReadWrite.cpp; sourceTree = "<group>"; };
+		AB6DA90D1CB690F1000279A4 /* XObjReadWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XObjReadWrite.h; sourceTree = "<group>"; };
+		AB6DA90E1CB690F1000279A4 /* XObjWriteEmbedded.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XObjWriteEmbedded.cpp; sourceTree = "<group>"; };
+		AB6DA90F1CB690F1000279A4 /* XObjWriteEmbedded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XObjWriteEmbedded.h; sourceTree = "<group>"; };
+		AB6DA9181CB69124000279A4 /* AssertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssertUtils.h; sourceTree = "<group>"; };
+		AB6DA9191CB6CF68000279A4 /* tex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tex.m; sourceTree = "<group>"; };
+		AB6DA91A1CB6CF68000279A4 /* tex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tex.h; sourceTree = "<group>"; };
+		AB6DA91C1CB7D8D7000279A4 /* context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = context.c; sourceTree = "<group>"; };
+		AB6DA91D1CB7D8D7000279A4 /* context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = context.h; sourceTree = "<group>"; };
+		AB6DA91F1CB8287B000279A4 /* ObjUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjUtils.cpp; sourceTree = "<group>"; };
+		AB6DA9201CB8287B000279A4 /* ObjUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjUtils.h; sourceTree = "<group>"; };
+		AB6DA92C1CB8C3D0000279A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AB6DA92E1CB94163000279A4 /* glu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glu.c; sourceTree = "<group>"; };
+		AB6DA92F1CB94163000279A4 /* glu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glu.h; sourceTree = "<group>"; };
+		AB6DA9341CB9D778000279A4 /* libOSMesa.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOSMesa.8.dylib; path = mesa/src/mesa/drivers/osmesa/.libs/libOSMesa.8.dylib; sourceTree = SOURCE_ROOT; };
+		AB7008271CB9E08F00D36CC9 /* libglapi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglapi.0.dylib; path = "mesa/src/mapi/shared-glapi/.libs/libglapi.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AB8A4A2D1A22DFB6002E5A59 /* GeneratePreviewForURL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GeneratePreviewForURL.mm; sourceTree = "<group>"; };
+		AB8A4A2E1A22DFB6002E5A59 /* GenerateThumbnailForURL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GenerateThumbnailForURL.mm; sourceTree = "<group>"; };
+		AB8A4A2F1A22DFB6002E5A59 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB8A4A301A22DFB6002E5A59 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		AB8A4A961A22FAED002E5A59 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		AB8A4AA41A22FBB0002E5A59 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		AB8A4AD81A22FD09002E5A59 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		AB9D8A621CBA068F0004A0D3 /* gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl.h; sourceTree = "<group>"; };
+		AB9D8A631CBA068F0004A0D3 /* osmesa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osmesa.h; sourceTree = "<group>"; };
+		AB9D8A651CBA0FD40004A0D3 /* dds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dds.h; sourceTree = "<group>"; };
+		AB9D8A661CBA0FD40004A0D3 /* dds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dds.m; sourceTree = "<group>"; };
+		AB9D8A761CBBEC950004A0D3 /* decode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = decode.m; sourceTree = "<group>"; };
+		ABAB4A311A23898A00B1BD18 /* XPlaneObj.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XPlaneObj.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABAB4A2F1A23898A00B1BD18 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB9D8A7F1CBC0DEA0004A0D3 /* libOSMesa.8.dylib in Frameworks */,
+				AB9D8A7E1CBC0DE50004A0D3 /* libglapi.0.dylib in Frameworks */,
+				AB6DA9291CB82FB3000279A4 /* Foundation.framework in Frameworks */,
+				AB6DA9281CB82F98000279A4 /* ApplicationServices.framework in Frameworks */,
+				AB6DA9271CB82F88000279A4 /* CoreFoundation.framework in Frameworks */,
+				ABD434BF1A2D6AF900ED8B26 /* QuickLook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB6DA8F01CB683C6000279A4 /* xptools/src */ = {
+			isa = PBXGroup;
+			children = (
+				AB6DA9001CB69086000279A4 /* Obj */,
+				AB6DA9171CB690FC000279A4 /* Utils */,
+			);
+			path = xptools/src;
+			sourceTree = "<group>";
+		};
+		AB6DA9001CB69086000279A4 /* Obj */ = {
+			isa = PBXGroup;
+			children = (
+				AB6DA9011CB690F1000279A4 /* ObjConvert.cpp */,
+				AB6DA9021CB690F1000279A4 /* ObjConvert.h */,
+				AB6DA9031CB690F1000279A4 /* ObjDraw.cpp */,
+				AB6DA9041CB690F1000279A4 /* ObjDraw.h */,
+				AB6DA9051CB690F1000279A4 /* ObjPointPool.cpp */,
+				AB6DA9061CB690F1000279A4 /* ObjPointPool.h */,
+				AB6DA9071CB690F1000279A4 /* XDefs.h */,
+				AB6DA9081CB690F1000279A4 /* XObjBuilder.cpp */,
+				AB6DA9091CB690F1000279A4 /* XObjBuilder.h */,
+				AB6DA90A1CB690F1000279A4 /* XObjDefs.cpp */,
+				AB6DA90B1CB690F1000279A4 /* XObjDefs.h */,
+				AB6DA90C1CB690F1000279A4 /* XObjReadWrite.cpp */,
+				AB6DA90D1CB690F1000279A4 /* XObjReadWrite.h */,
+				AB6DA90E1CB690F1000279A4 /* XObjWriteEmbedded.cpp */,
+				AB6DA90F1CB690F1000279A4 /* XObjWriteEmbedded.h */,
+			);
+			path = Obj;
+			sourceTree = "<group>";
+		};
+		AB6DA9171CB690FC000279A4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AB6DA9181CB69124000279A4 /* AssertUtils.h */,
+				AB6DA91F1CB8287B000279A4 /* ObjUtils.cpp */,
+				AB6DA9201CB8287B000279A4 /* ObjUtils.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AB8A49DA1A22DBE7002E5A59 = {
+			isa = PBXGroup;
+			children = (
+				AB8A4A281A22DF8F002E5A59 /* qlgenerator */,
+				AB9D8A611CBA06290004A0D3 /* mesa/include/GL */,
+				AB9D8A641CBA0FAC0004A0D3 /* QLdds/DDS */,
+				AB6DA8F01CB683C6000279A4 /* xptools/src */,
+				ABAB4CFF1A238C6000B1BD18 /* External Frameworks and Libraries */,
+				AB8A4A0B1A22DD6B002E5A59 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB8A4A0B1A22DD6B002E5A59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABAB4A311A23898A00B1BD18 /* XPlaneObj.qlgenerator */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB8A4A281A22DF8F002E5A59 /* qlgenerator */ = {
+			isa = PBXGroup;
+			children = (
+				AB8A4A2E1A22DFB6002E5A59 /* GenerateThumbnailForURL.mm */,
+				AB8A4A2D1A22DFB6002E5A59 /* GeneratePreviewForURL.mm */,
+				AB6DA91C1CB7D8D7000279A4 /* context.c */,
+				AB6DA91D1CB7D8D7000279A4 /* context.h */,
+				AB6DA92E1CB94163000279A4 /* glu.c */,
+				AB6DA92F1CB94163000279A4 /* glu.h */,
+				AB6DA91A1CB6CF68000279A4 /* tex.h */,
+				AB6DA9191CB6CF68000279A4 /* tex.m */,
+				AB8A4A301A22DFB6002E5A59 /* main.c */,
+				AB6DA8ED1CB60415000279A4 /* obj.h */,
+				AB6DA8EB1CB603ED000279A4 /* obj.mm */,
+				AB8A4A2F1A22DFB6002E5A59 /* Info.plist */,
+			);
+			path = qlgenerator;
+			sourceTree = "<group>";
+		};
+		AB9D8A611CBA06290004A0D3 /* mesa/include/GL */ = {
+			isa = PBXGroup;
+			children = (
+				AB9D8A621CBA068F0004A0D3 /* gl.h */,
+				AB9D8A631CBA068F0004A0D3 /* osmesa.h */,
+			);
+			path = mesa/include/GL;
+			sourceTree = "<group>";
+		};
+		AB9D8A641CBA0FAC0004A0D3 /* QLdds/DDS */ = {
+			isa = PBXGroup;
+			children = (
+				AB9D8A651CBA0FD40004A0D3 /* dds.h */,
+				AB9D8A661CBA0FD40004A0D3 /* dds.m */,
+				AB9D8A761CBBEC950004A0D3 /* decode.m */,
+			);
+			path = QLdds/DDS;
+			sourceTree = "<group>";
+		};
+		ABAB4CFF1A238C6000B1BD18 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				AB6DA9341CB9D778000279A4 /* libOSMesa.8.dylib */,
+				AB7008271CB9E08F00D36CC9 /* libglapi.0.dylib */,
+				AB6DA92C1CB8C3D0000279A4 /* CoreGraphics.framework */,
+				AB8A4AD81A22FD09002E5A59 /* ApplicationServices.framework */,
+				AB8A4A961A22FAED002E5A59 /* CoreFoundation.framework */,
+				AB60480E1A2691E900D39FDE /* Foundation.framework */,
+				AB6DA8EE1CB60C27000279A4 /* OpenGL.framework */,
+				AB8A4AA41A22FBB0002E5A59 /* QuickLook.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = SDKROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABAB4A301A23898A00B1BD18 /* qlgenerator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABAB4A361A23898B00B1BD18 /* Build configuration list for PBXNativeTarget "qlgenerator" */;
+			buildPhases = (
+				ABAB4A2E1A23898A00B1BD18 /* Sources */,
+				ABAB4A2F1A23898A00B1BD18 /* Frameworks */,
+				AB6DA9371CB9D985000279A4 /* CopyFiles */,
+				AB6DA9391CB9DB4F000279A4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = qlgenerator;
+			productName = qlxcodeobj.qlgenerator;
+			productReference = ABAB4A311A23898A00B1BD18 /* XPlaneObj.qlgenerator */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB8A49DC1A22DBE7002E5A59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+			};
+			buildConfigurationList = AB8A49DF1A22DBE7002E5A59 /* Build configuration list for PBXProject "QLXPlaneObj" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB8A49DA1A22DBE7002E5A59;
+			productRefGroup = AB8A4A0B1A22DD6B002E5A59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABAB4A301A23898A00B1BD18 /* qlgenerator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AB6DA9391CB9DB4F000279A4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_name_tool -change /usr/local/lib/libOSMesa.8.dylib @loader_path/../Frameworks/libOSMesa.8.dylib -change /usr/local/lib/libglapi.0.dylib @loader_path/../Frameworks/libglapi.0.dylib ${BUILT_PRODUCTS_DIR}/${EXECUTABLE_PATH}\ninstall_name_tool -id libOSMesa.8.dylib -change /usr/local/lib/libglapi.0.dylib @loader_path/../Frameworks/libglapi.0.dylib ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/libOSMesa.8.dylib\ninstall_name_tool -id libglapi.0.dylib ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/libglapi.0.dylib\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABAB4A2E1A23898A00B1BD18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6DA9151CB690F1000279A4 /* XObjReadWrite.cpp in Sources */,
+				AB6DA91E1CB7D8D7000279A4 /* context.c in Sources */,
+				AB6DA9121CB690F1000279A4 /* ObjPointPool.cpp in Sources */,
+				AB6DA8EC1CB603ED000279A4 /* obj.mm in Sources */,
+				AB6DA91B1CB6CF68000279A4 /* tex.m in Sources */,
+				AB6DA9111CB690F1000279A4 /* ObjDraw.cpp in Sources */,
+				AB6DA9301CB94163000279A4 /* glu.c in Sources */,
+				AB6DA9211CB8287B000279A4 /* ObjUtils.cpp in Sources */,
+				ABAB4A381A238A7B00B1BD18 /* GenerateThumbnailForURL.mm in Sources */,
+				AB6DA9141CB690F1000279A4 /* XObjDefs.cpp in Sources */,
+				ABAB4A3A1A238A8400B1BD18 /* GeneratePreviewForURL.mm in Sources */,
+				AB9D8A671CBA0FD40004A0D3 /* dds.m in Sources */,
+				ABAB4A391A238A8000B1BD18 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AB8A49DD1A22DBE7002E5A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Jonathan Harris";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_FAST_MATH = YES;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"APL=0",
+					"LIN=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				WARNING_CFLAGS = "-Winline";
+			};
+			name = Debug;
+		};
+		AB8A49DE1A22DBE7002E5A59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Jonathan Harris";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_PASCAL_STRINGS = NO;
+				GCC_FAST_MATH = YES;
+				GCC_INPUT_FILETYPE = automatic;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					"APL=0",
+					"LIN=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_UNROLL_LOOPS = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				WARNING_CFLAGS = "-Winline";
+			};
+			name = Release;
+		};
+		ABAB4A341A23898B00B1BD18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/mesa/include",
+					"$(PROJECT_DIR)/xptools/src/Obj",
+					"$(PROJECT_DIR)/xptools/src/Utils",
+				);
+				INFOPLIST_FILE = qlgenerator/Info.plist;
+				INSTALL_PATH = /Library/QuickLook;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mesa/build/darwin-x86_64-debug/gallium/targets/osmesa",
+					"$(PROJECT_DIR)/mesa/src/mesa/drivers/osmesa/.libs",
+					"$(PROJECT_DIR)/mesa/src/mapi/shared-glapi/.libs",
+				);
+				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.xplaneobj.qlgenerator;
+				PRODUCT_NAME = XPlaneObj;
+				WRAPPER_EXTENSION = qlgenerator;
+			};
+			name = Debug;
+		};
+		ABAB4A351A23898B00B1BD18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/mesa/include",
+					"$(PROJECT_DIR)/xptools/src/Obj",
+					"$(PROJECT_DIR)/xptools/src/Utils",
+				);
+				INFOPLIST_FILE = qlgenerator/Info.plist;
+				INSTALL_PATH = /Library/QuickLook;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mesa/build/darwin-x86_64-debug/gallium/targets/osmesa",
+					"$(PROJECT_DIR)/mesa/src/mesa/drivers/osmesa/.libs",
+					"$(PROJECT_DIR)/mesa/src/mapi/shared-glapi/.libs",
+				);
+				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.xplaneobj.qlgenerator;
+				PRODUCT_NAME = XPlaneObj;
+				WRAPPER_EXTENSION = qlgenerator;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB8A49DF1A22DBE7002E5A59 /* Build configuration list for PBXProject "QLXPlaneObj" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB8A49DD1A22DBE7002E5A59 /* Debug */,
+				AB8A49DE1A22DBE7002E5A59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABAB4A361A23898B00B1BD18 /* Build configuration list for PBXNativeTarget "qlgenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABAB4A341A23898B00B1BD18 /* Debug */,
+				ABAB4A351A23898B00B1BD18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB8A49DC1A22DBE7002E5A59 /* Project object */;
+}

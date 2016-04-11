@@ -1,0 +1,9 @@
+[submodule "xptools"]
+	path = xptools
+	url = https://github.com/X-Plane/xptools.git
+[submodule "mesa"]
+	path = mesa
+	url = git://anongit.freedesktop.org/mesa/mesa
+[submodule "QLdds"]
+	path = QLdds
+	url = https://github.com/Marginal/QLdds.git
