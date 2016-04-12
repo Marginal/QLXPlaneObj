@@ -62,28 +62,5 @@
 	<true/>		<!-- but allow multiple helper processes -->
 	<key>QLThumbnailMinimumSize</key>
 	<integer>16</integer>
-	<key>UTImportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.3d-content</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>X-Plane 3D object</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.laminar.obj</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://developer.x-plane.com/?article=obj8-file-format-specification</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>obj</string>
-					<string>OBJ</string>
-				</array>
-			</dict>
-		</dict>
-	</array>
 </dict>
 </plist>
