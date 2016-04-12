@@ -325,6 +325,7 @@
 					DEBUG,
 					"APL=0",
 					"LIN=1",
+					"DDS=XPlaneObjDDS",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "";
@@ -352,6 +353,7 @@
 					NDEBUG,
 					"APL=0",
 					"LIN=1",
+					"DDS=XPlaneObjDDS",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
