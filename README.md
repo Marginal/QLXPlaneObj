@@ -5,9 +5,12 @@ This package allows OSX Finder to display thumbnails and QuickLook previews for 
 
 Installation
 ------------
-* Download the `.pkg` file (the green button) of the [latest release](https://github.com/Marginal/QLXPlaneObj/releases/latest).
+* Download the `.pkg` file of the [latest release](https://github.com/Marginal/QLXPlaneObj/releases/latest).
 * Double-click on it.
 * The Installer app will walk you through the installation process.
+* To see thumbnails you may need to relaunch Finder (ctrl-⌥-click on the Finder icon in the Dock and choose Relaunch) or log out and back in again.
+* You may experience high disk usage for a few minutes after installation while Spotlight re-indexes all of your X-Plane objects.
+
 
 Screenshots
 -----------
@@ -25,8 +28,8 @@ Uninstall
 
 Limitations
 -----------
-* To see thumbnails you may need to relaunch Finder (ctrl-⌥-click on the Finder icon in the Dock and choose Relaunch) or log out and back in again.
 * Requires OSX 10.6 or later.
+* Objects may be shown untextured under OSX 10.7-10.9 due to sandbox limitations on the QuickLook daemon.
 
 Acknowledgements
 ----------------
