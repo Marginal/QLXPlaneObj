@@ -27,9 +27,9 @@
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9</string>
+	<string>0.9.1</string>
 	<key>CFBundleVersion</key>
-	<string>0.9</string>
+	<string>0.9.1</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
