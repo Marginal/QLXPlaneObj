@@ -36,7 +36,11 @@ make -j4
 
 ## Building QLXPlaneObj
 
-Build the Xcode project `QLQPlaneObj.xcodeproj`.
+The Xcode project `QLXPlaneObj.xcodeproj` builds the following targets:
+
+* QLXPlaneObj.app - Launch Services won't read [Uniform Type Identifiers](http://developer.apple.com/library/mac/documentation/General/Conceptual/DevPedia-CocoaCore/UniformTypeIdentifier.html) from plugin bundles, so this dummy app serves to register the UTIs of the media types that the plugins understand. Should be installed in /Libarary/Application Support/QLXPlaneObj/.
+* XPlaneObj.mdimporter - Spotlight plugin. Should be installed in /Library/Spotlight/.
+* XPlaneObj.qlgenerator - QuickLook plugin. Should be installed in /Library/QuickLook/.
 
 
 ## Packaging

@@ -3,20 +3,22 @@ QuickLook XPlane Object
 
 This package allows OSX Finder to display thumbnails and QuickLook previews for [X-Plane](http://www.x-plane.com) 3D Object files.
 
-![Finder screenshot](img/finder.jpeg) ![Preview](img/preview.jpeg) ![Multiple](img/multiple.jpeg)
-
 Installation
 ------------
 * Download the `.pkg` file (the green button) of the [latest release](https://github.com/Marginal/QLXPlaneObj/releases/latest).
 * Double-click on it.
 * The Installer app will walk you through the installation process.
 
+Screenshots
+-----------
+![Finder screenshot](img/finder.jpeg) ![Get Info](img/getinfo.jpeg) ![Preview](img/preview.jpeg) ![Multiple](img/multiple.jpeg)
+
 Uninstall
 ---------
 * Run the Terminal app (found in Applications → Utilities).
 * Copy the following and paste into the Terminal app:
 
-`sudo rm -rf "/Library/QuickLook/QLXPlaneObj.qlgenerator"`
+        sudo rm -rf "/Library/Application Support/QLXPlaneObj" "/Library/QuickLook/XPlaneObj.qlgenerator" "/Library/Spotlight/XPlaneObj.mdimporter"
 
 * Press Enter.
 * Type your password and press Enter.

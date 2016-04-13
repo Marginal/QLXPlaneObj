@@ -28,6 +28,11 @@
 		ABAB4A391A238A8000B1BD18 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = AB8A4A301A22DFB6002E5A59 /* main.c */; };
 		ABAB4A3A1A238A8400B1BD18 /* GeneratePreviewForURL.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB8A4A2D1A22DFB6002E5A59 /* GeneratePreviewForURL.mm */; };
 		ABB89DCE1CBCAD08006C0D48 /* QLXPlaneObj in CopyFiles */ = {isa = PBXBuildFile; fileRef = ABB89DB51CBCAC3D006C0D48 /* QLXPlaneObj */; };
+		ABB89DE61CBCB4DF006C0D48 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB89DE31CBCB4DF006C0D48 /* GetMetadataForFile.m */; };
+		ABB89DE81CBCB4DF006C0D48 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = ABB89DE51CBCB4DF006C0D48 /* main.c */; };
+		ABB89DEB1CBCB508006C0D48 /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = ABB89DEA1CBCB508006C0D48 /* schema.xml */; };
+		ABB89DEE1CBCB545006C0D48 /* schema.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABB89DEC1CBCB545006C0D48 /* schema.strings */; };
+		ABB89DF21CBD29C2006C0D48 /* revlib.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB89DF11CBD29C2006C0D48 /* revlib.m */; };
 		ABD434BF1A2D6AF900ED8B26 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8A4AA41A22FBB0002E5A59 /* QuickLook.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +43,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = ABAB4A301A23898A00B1BD18;
 			remoteInfo = qlgenerator;
+		};
+		ABB89DEF1CBCB5AB006C0D48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB8A49DC1A22DBE7002E5A59 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABB89DD21CBCB312006C0D48;
+			remoteInfo = mdimporter;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -110,9 +122,17 @@
 		AB9D8A661CBA0FD40004A0D3 /* dds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dds.m; sourceTree = "<group>"; };
 		AB9D8A761CBBEC950004A0D3 /* decode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = decode.m; sourceTree = "<group>"; };
 		ABAB4A311A23898A00B1BD18 /* XPlaneObj.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XPlaneObj.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABB89DB41CBCAC3D006C0D48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = app/Info.plist; sourceTree = "<group>"; };
-		ABB89DB51CBCAC3D006C0D48 /* QLXPlaneObj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = QLXPlaneObj; path = app/QLXPlaneObj; sourceTree = "<group>"; };
+		ABB89DB41CBCAC3D006C0D48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABB89DB51CBCAC3D006C0D48 /* QLXPlaneObj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = QLXPlaneObj; sourceTree = "<group>"; };
 		ABB89DBA1CBCACB5006C0D48 /* QLXPlaneObj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLXPlaneObj.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB89DD31CBCB312006C0D48 /* XPlaneObj.mdimporter */ = {isa = PBXFileReference; explicitFileType = "wrapper.spotlight-importer"; includeInIndex = 0; path = XPlaneObj.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABB89DE31CBCB4DF006C0D48 /* GetMetadataForFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
+		ABB89DE41CBCB4DF006C0D48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABB89DE51CBCB4DF006C0D48 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		ABB89DEA1CBCB508006C0D48 /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
+		ABB89DED1CBCB545006C0D48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/schema.strings; sourceTree = "<group>"; };
+		ABB89DF11CBD29C2006C0D48 /* revlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = revlib.m; sourceTree = "<group>"; };
+		ABB89DF31CBD29E2006C0D48 /* revlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = revlib.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +146,13 @@
 				AB6DA9281CB82F98000279A4 /* ApplicationServices.framework in Frameworks */,
 				AB6DA9271CB82F88000279A4 /* CoreFoundation.framework in Frameworks */,
 				ABD434BF1A2D6AF900ED8B26 /* QuickLook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB89DD01CBCB312006C0D48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB89DB11CBCABED006C0D48 /* app */,
+				ABB89DE21CBCB36A006C0D48 /* mdimporter */,
 				AB8A4A281A22DF8F002E5A59 /* qlgenerator */,
 				AB9D8A611CBA06290004A0D3 /* mesa/include/GL */,
 				AB9D8A641CBA0FAC0004A0D3 /* QLdds/DDS */,
@@ -191,6 +219,7 @@
 			children = (
 				ABAB4A311A23898A00B1BD18 /* XPlaneObj.qlgenerator */,
 				ABB89DBA1CBCACB5006C0D48 /* QLXPlaneObj.app */,
+				ABB89DD31CBCB312006C0D48 /* XPlaneObj.mdimporter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,7 +283,29 @@
 				ABB89DB51CBCAC3D006C0D48 /* QLXPlaneObj */,
 				ABB89DB41CBCAC3D006C0D48 /* Info.plist */,
 			);
-			name = app;
+			path = app;
+			sourceTree = "<group>";
+		};
+		ABB89DE21CBCB36A006C0D48 /* mdimporter */ = {
+			isa = PBXGroup;
+			children = (
+				ABB89DE31CBCB4DF006C0D48 /* GetMetadataForFile.m */,
+				ABB89DE51CBCB4DF006C0D48 /* main.c */,
+				ABB89DF31CBD29E2006C0D48 /* revlib.h */,
+				ABB89DF11CBD29C2006C0D48 /* revlib.m */,
+				ABB89DE41CBCB4DF006C0D48 /* Info.plist */,
+				ABB89DE91CBCB4EC006C0D48 /* Resources */,
+			);
+			path = mdimporter;
+			sourceTree = "<group>";
+		};
+		ABB89DE91CBCB4EC006C0D48 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ABB89DEC1CBCB545006C0D48 /* schema.strings */,
+				ABB89DEA1CBCB508006C0D48 /* schema.xml */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,12 +338,30 @@
 			buildRules = (
 			);
 			dependencies = (
+				ABB89DF01CBCB5AB006C0D48 /* PBXTargetDependency */,
 				ABB89DCC1CBCACC0006C0D48 /* PBXTargetDependency */,
 			);
 			name = QLXPlaneObj;
 			productName = QLXPlaneObj;
 			productReference = ABB89DBA1CBCACB5006C0D48 /* QLXPlaneObj.app */;
 			productType = "com.apple.product-type.application";
+		};
+		ABB89DD21CBCB312006C0D48 /* mdimporter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABB89DE11CBCB312006C0D48 /* Build configuration list for PBXNativeTarget "mdimporter" */;
+			buildPhases = (
+				ABB89DD11CBCB312006C0D48 /* Resources */,
+				ABB89DCF1CBCB312006C0D48 /* Sources */,
+				ABB89DD01CBCB312006C0D48 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mdimporter;
+			productName = xplaneobj.mdimporter;
+			productReference = ABB89DD31CBCB312006C0D48 /* XPlaneObj.mdimporter */;
+			productType = "com.apple.product-type.spotlight-importer";
 		};
 /* End PBXNativeTarget section */
 
@@ -303,6 +372,9 @@
 				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					ABB89DB91CBCACB5006C0D48 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					ABB89DD21CBCB312006C0D48 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
@@ -321,10 +393,23 @@
 			projectRoot = "";
 			targets = (
 				ABB89DB91CBCACB5006C0D48 /* QLXPlaneObj */,
+				ABB89DD21CBCB312006C0D48 /* mdimporter */,
 				ABAB4A301A23898A00B1BD18 /* qlgenerator */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABB89DD11CBCB312006C0D48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB89DEB1CBCB508006C0D48 /* schema.xml in Resources */,
+				ABB89DEE1CBCB545006C0D48 /* schema.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		AB6DA9391CB9DB4F000279A4 /* ShellScript */ = {
@@ -363,6 +448,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ABB89DCF1CBCB312006C0D48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB89DE81CBCB4DF006C0D48 /* main.c in Sources */,
+				ABB89DE61CBCB4DF006C0D48 /* GetMetadataForFile.m in Sources */,
+				ABB89DF21CBD29C2006C0D48 /* revlib.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -371,7 +466,23 @@
 			target = ABAB4A301A23898A00B1BD18 /* qlgenerator */;
 			targetProxy = ABB89DCB1CBCACC0006C0D48 /* PBXContainerItemProxy */;
 		};
+		ABB89DF01CBCB5AB006C0D48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABB89DD21CBCB312006C0D48 /* mdimporter */;
+			targetProxy = ABB89DEF1CBCB5AB006C0D48 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ABB89DEC1CBCB545006C0D48 /* schema.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABB89DED1CBCB545006C0D48 /* en */,
+			);
+			name = schema.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AB8A49DD1A22DBE7002E5A59 /* Debug */ = {
@@ -382,6 +493,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Jonathan Harris";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_PASCAL_STRINGS = NO;
 				GCC_FAST_MATH = YES;
@@ -391,7 +503,6 @@
 					DEBUG,
 					"APL=0",
 					"LIN=1",
-					"DDS=XPlaneObjDDS",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "";
@@ -419,7 +530,6 @@
 					NDEBUG,
 					"APL=0",
 					"LIN=1",
-					"DDS=XPlaneObjDDS",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
@@ -439,6 +549,12 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"APL=0",
+					"LIN=1",
+					"DDS=XPlaneObjDDS",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/mesa/include",
 					"$(PROJECT_DIR)/xptools/src/Obj",
@@ -465,6 +581,12 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					"APL=0",
+					"LIN=1",
+					"DDS=XPlaneObjDDS",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/mesa/include",
 					"$(PROJECT_DIR)/xptools/src/Obj",
@@ -557,6 +679,68 @@
 			};
 			name = Release;
 		};
+		ABB89DDF1CBCB312006C0D48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = mdimporter/Info.plist;
+				INSTALL_PATH = /Library/Spotlight;
+				LIBRARY_STYLE = BUNDLE;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.xplaneobj.mdimporter;
+				PRODUCT_NAME = XPlaneObj;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Debug;
+		};
+		ABB89DE01CBCB312006C0D48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = mdimporter/Info.plist;
+				INSTALL_PATH = /Library/Spotlight;
+				LIBRARY_STYLE = BUNDLE;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.xplaneobj.mdimporter;
+				PRODUCT_NAME = XPlaneObj;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -585,6 +769,16 @@
 				ABB89DCA1CBCACB5006C0D48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABB89DE11CBCB312006C0D48 /* Build configuration list for PBXNativeTarget "mdimporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABB89DDF1CBCB312006C0D48 /* Debug */,
+				ABB89DE01CBCB312006C0D48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

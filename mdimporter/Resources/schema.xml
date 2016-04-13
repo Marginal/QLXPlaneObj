@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema version="1.0" xmlns="http://www.apple.com/metadata"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.apple.com/metadata file:///System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Resources/MetadataSchema.xsd">
+	<attributes>
+		<!-- Unused: Recent versions of OSX ignore the contents of this file unless it contains at least one custom attribute -->
+		<attribute name="uk_org_marginal_xplaneobj_obj" type="CFString"/>
+	</attributes>
+	<types>
+		<type name="com.laminar.obj">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+            <displayattrs>
+                kMDItemKeywords
+            </displayattrs>
+		</type>
+        <type name="public.geometry-definition-format">
+            <allattrs>
+                kMDItemKeywords
+                uk_org_marginal_xplaneobj_obj
+            </allattrs>
+            <displayattrs>
+                kMDItemKeywords
+            </displayattrs>
+        </type>
+	</types>
+</schema>
