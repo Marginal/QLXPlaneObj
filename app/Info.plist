@@ -29,6 +29,82 @@
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>X-Plane autogen point</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.laminar.agp</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://developer.x-plane.com/?article=x-plane-10-autogen-scenery-file-format</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>agp</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>X-Plane facade</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.laminar.fac</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://developer.x-plane.com/?article=x-plane-10-facade-fac-file-format-specification</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>fac</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>X-Plane forest</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.laminar.for</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://developer.x-plane.com/?article=forest-for-file-format-specification</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>for</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>X-Plane painted line</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.laminar.lin</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://developer.x-plane.com/?article=painted-line-lin-file-format-specification</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>lin</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
 			<!-- For pre-10.11 which doesn't define public.geometry-definition-format -->
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -46,6 +122,44 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>obj</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>X-Plane draped polygon</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.laminar.pol</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://developer.x-plane.com/?article=draped-polygon-polfac-file-format-specification</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pol</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>X-Plane object string</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.laminar.str</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://developer.x-plane.com/?article=object-string-str-file-format-specification</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>str</string>
 				</array>
 			</dict>
 		</dict>

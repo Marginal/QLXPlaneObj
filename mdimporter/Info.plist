@@ -11,7 +11,14 @@
 			<string>MDImporter</string>
 			<key>LSItemContentTypes</key>
 			<array>
+				<string>com.laminar.agp</string>
+				<string>com.laminar.fac</string>
+				<string>com.laminar.for</string>
+				<string>com.laminar.lin</string>
 				<string>com.laminar.obj</string>
+				<string>com.laminar.pol</string>
+				<string>com.laminar.str</string>
+				<string>public.fortran-source</string>
 				<string>public.geometry-definition-format</string>
 			</array>
 		</dict>

@@ -8,23 +8,88 @@
 		<attribute name="uk_org_marginal_xplaneobj_obj" type="CFString"/>
 	</attributes>
 	<types>
+		<type name="com.laminar.agp">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
+		<type name="com.laminar.fac">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
+		<type name="com.laminar.for">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
+		<type name="com.laminar.lin">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
 		<type name="com.laminar.obj">
 			<allattrs>
 				kMDItemKeywords
 				uk_org_marginal_xplaneobj_obj
 			</allattrs>
-            <displayattrs>
-                kMDItemKeywords
-            </displayattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
 		</type>
-        <type name="public.geometry-definition-format">
-            <allattrs>
-                kMDItemKeywords
-                uk_org_marginal_xplaneobj_obj
-            </allattrs>
-            <displayattrs>
-                kMDItemKeywords
-            </displayattrs>
-        </type>
+		<type name="com.laminar.pol">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
+		<type name="com.laminar.str">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
+
+		<!-- Default and Xcode defined UTIs that don't have schemas -->
+		<type name="public.fortran-source">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
+		<type name="public.geometry-definition-format">
+			<allattrs>
+				kMDItemKeywords
+				uk_org_marginal_xplaneobj_obj
+			</allattrs>
+			<displayattrs>
+				kMDItemKeywords
+			</displayattrs>
+		</type>
 	</types>
 </schema>
