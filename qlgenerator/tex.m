@@ -147,7 +147,6 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         UInt8 *uncompressed;
         if (!(uncompressed = malloc(width * height * 4)))
             return 0;
-        [dds DecodeSurface:0 atLevel:0 To:(UInt32*)uncompressed withStride:width];  // Ignore any mipmaps
 
         if (targets[role])
             filenames[role] = ddsfilename;
@@ -157,9 +156,22 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         glBindTexture(GL_TEXTURE_2D, targets[role]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        if (mipmaps > 1)
+        {
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mipmaps - 1);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        }
+        else
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, uncompressed);
+
+        for (unsigned int level = 0; level < mipmaps; level++)
+        {
+            [dds DecodeSurface:0 atLevel:level To:(UInt32*)uncompressed withStride:width];
+            glTexImage2D(GL_TEXTURE_2D, level, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, uncompressed);
+            if (! (width /= 2))  width  = 1;
+            if (! (height /= 2)) height = 1;
+        }
         free(uncompressed);
         return targets[role];
     }
