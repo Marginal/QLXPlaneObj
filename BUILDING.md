@@ -15,7 +15,15 @@ git submodule init
 git submodule update
 ```
 
-## Building Mesa
+## Building
+If you want the project to work on older versions of OSX:
+
+```
+export CXXFLAGS=-stdlib=libc++
+export MACOSX_DEPLOYMENT_TARGET=10.7
+```
+
+### Building Mesa
 
 Mesa's most efficient offscreen rendering method depends on llvm. If you have [Homebrew](http://brew.sh/) you can install llvm with:
 
@@ -34,7 +42,7 @@ ACLOCAL="aclocal -I/usr/local/share/aclocal" autoreconf -vfi
 make -j4
 ```
 
-## Building QLXPlaneObj
+### Building QLXPlaneObj
 
 The Xcode project `QLXPlaneObj.xcodeproj` builds the following targets:
 

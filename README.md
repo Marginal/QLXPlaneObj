@@ -28,7 +28,7 @@ Uninstall
 
 Limitations
 -----------
-* Requires OSX 10.6 or later.
+* Requires OSX 10.7 or later.
 * Objects may be shown untextured under OSX 10.7-10.9 due to sandbox limitations on the QuickLook daemon.
 
 Acknowledgements
