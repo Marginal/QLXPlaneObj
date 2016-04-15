@@ -24,10 +24,10 @@ static const unsigned int FOURCC_DXT5 = 0x35545844;
 
 
 // Cache
-GLenum targets[kTexRoleCount];
-NSURL *filenames[kTexRoleCount];
+static GLuint targets[kTexRoleCount];
+static NSURL *filenames[kTexRoleCount];
 #if APL
-CFDataRef *data[kTexRoleCount];   // We're using GL_UNPACK_CLIENT_STORAGE_APPLE so need to retain the source bitmap data
+static CFDataRef data[kTexRoleCount];   // We're using GL_UNPACK_CLIENT_STORAGE_APPLE so need to retain the source bitmap data
 #endif
 
 
@@ -103,14 +103,10 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         GLsizei mipmaps = MAX(1, ddsheader->dwMipMapCount);   // according to http://msdn.microsoft.com/en-us/library/bb943982 we ignore DDSD_MIPMAPCOUNT in dwFlags
         const char *ddsdata = (char *) ddsfile.bytes + sizeof(DDS_header);
 
-        if (targets[role])
-        {
-            filenames[role] = ddsfilename;
-            CFRelease(data[role]);
-        }
-        else
+        if (!targets[role])
             glGenTextures(1, &targets[role]);
-
+        else
+            CFRelease(data[role]);
         glBindTexture(GL_TEXTURE_2D, targets[role]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -122,7 +118,6 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         else
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        ASSERT_GL;
 
         for (unsigned int level = 0; level < mipmaps; level++)
         {
@@ -132,6 +127,9 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
             if (! (width /= 2))  width  = 1;
             if (! (height /= 2)) height = 1;
         }
+        ASSERT_GL;
+
+        filenames[role] = ddsfilename;
         data[role] = CFBridgingRetain(ddsfile);  // keep a copy of the data
         return targets[role];
     }
@@ -148,11 +146,8 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         if (!(uncompressed = malloc(width * height * 4)))
             return 0;
 
-        if (targets[role])
-            filenames[role] = ddsfilename;
-        else
+        if (!targets[role])
             glGenTextures(1, &targets[role]);
-
         glBindTexture(GL_TEXTURE_2D, targets[role]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -172,6 +167,9 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
             if (! (width /= 2))  width  = 1;
             if (! (height /= 2)) height = 1;
         }
+        ASSERT_GL;
+
+        filenames[role] = ddsfilename;
         free(uncompressed);
         return targets[role];
     }
@@ -194,23 +192,12 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     if (!pngdata)
         return 0;
 
-#if DEBUG
-    CGImageAlphaInfo alphainfo = CGImageGetAlphaInfo(image);
-    CGBitmapInfo bitmapinfo = CGImageGetBitmapInfo(image);
-    size_t bpp = CGImageGetBitsPerPixel(image);
-    const UInt8 *pixdata = CFDataGetBytePtr(pngdata);
-#endif
-
-    if (targets[role])
-    {
-        filenames[role] = ddsfilename;
+    if (!targets[role])
+        glGenTextures(1, &targets[role]);
 #if APL
+    else
         CFRelease(data[role]);
 #endif
-    }
-    else
-        glGenTextures(1, &targets[role]);
-
     glBindTexture(GL_TEXTURE_2D, targets[role]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -219,8 +206,11 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CGImageGetWidth(image), CGImageGetHeight(image), 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, CFDataGetBytePtr(pngdata));
     ASSERT_GL;
 
+    filenames[role] = ddsfilename;
 #if APL
-    data[role] = CFBridgingRetain(pngdata);  // keep a copy of the data
+    data[role] = pngdata;  // keep a copy of the data
+#else
+    CFRelease(pngdata);
 #endif
     return targets[role];
 }
