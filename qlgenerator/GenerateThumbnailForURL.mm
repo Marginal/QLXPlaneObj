@@ -23,8 +23,8 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
         XPlaneOBJ *obj = [XPlaneOBJ objWithURL:url];
         if (!obj)
         {
-            // Not an object that we recognise - pass on to other generators
-            QLThumbnailRequestSetImageAtURL(thumbnail, url, NULL);
+            // Not an object that we recognise - try to pass on to other generators
+            QLThumbnailRequestSetThumbnailWithURLRepresentation(thumbnail, url, contentTypeUTI, NULL, NULL);
             return kQLReturnNoError;
         }
 
