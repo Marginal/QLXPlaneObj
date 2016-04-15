@@ -38,7 +38,7 @@ static GLsizei fbo_width, fbo_height;
 
 
 // Setup OpenGL context. Returns non-zero on error.
-int context_setup(GLsizei width, GLsizei height, float minCoords[3], float maxCoords[3])
+int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoords[3], float maxCoords[3])
 {
     // If setup fails, don't keep trying
     if (failed)
@@ -123,6 +123,7 @@ int context_setup(GLsizei width, GLsizei height, float minCoords[3], float maxCo
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// assumes not pre-multiplied - but see http://stackoverflow.com/questions/24346585/opengl-render-to-texture-with-partial-transparancy-translucency-and-then-rende
 
         glEnable(GL_LIGHT0);
+        glEnable(GL_LIGHTING);
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);  // ObjDraw sets glColor in response to ATTR_diffuse
         glEnable(GL_COLOR_MATERIAL);
 
@@ -209,20 +210,31 @@ int context_setup(GLsizei width, GLsizei height, float minCoords[3], float maxCo
     glShadeModel(GL_SMOOTH);
 
     glColor3f(1.f, 1.f, 1.f);
-    float zero[4] = { 0.0f, 0.0f, 0.0, 1.0f };
-	glMaterialfv(GL_FRONT, GL_SPECULAR, zero);
-	glMaterialfv(GL_FRONT, GL_EMISSION, zero);
-	glMateriali (GL_FRONT, GL_SHININESS, 0);
+    GLfloat zero[4] = { 0, 0, 0, 1.f };
+    glMaterialfv(GL_FRONT, GL_SPECULAR, zero);
+    glMaterialfv(GL_FRONT, GL_EMISSION, zero);
+    glMateriali (GL_FRONT, GL_SHININESS, 0);
 
-    GLfloat lgt_blk[4] = { 0.0f, 0.0f, 0.0f, 1.f };
-    GLfloat lgt_amb[4] = { 0.5f, 0.5f, 0.5f, 1.f };
-    GLfloat lgt_dif[4] = { 0.5f, 0.5f, 0.5f, 1.f };
+    GLfloat lgt_blk[4] = { 0, 0, 0, 1.f };
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lgt_blk);
-    glLightfv(GL_LIGHT0,GL_AMBIENT , lgt_amb);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE , lgt_dif);
-    glLightfv(GL_LIGHT0,GL_SPECULAR, lgt_blk);
+    if (have_normals)
+    {
+        GLfloat lgt_amb[4] = { 0.5f, 0.5f, 0.5f, 1.f };
+        GLfloat lgt_dif[4] = { 0.5f, 0.5f, 0.5f, 1.f };
+        glLightfv(GL_LIGHT0,GL_AMBIENT , lgt_amb);
+        glLightfv(GL_LIGHT0,GL_DIFFUSE , lgt_dif);
+        glLightfv(GL_LIGHT0,GL_SPECULAR, lgt_blk);
+    }
+    else
+    {
+        GLfloat lgt_amb[4] = { 0.8f, 0.8f, 0.8f, 1.f };
+        GLfloat lgt_dif[4] = { 0, 0, 0, 1.f };
+        glLightfv(GL_LIGHT0,GL_AMBIENT , lgt_amb);
+        glLightfv(GL_LIGHT0,GL_DIFFUSE , lgt_dif);
+        glLightfv(GL_LIGHT0,GL_SPECULAR, lgt_blk);
+    }
 
-    GLfloat lgt_dir[4]={ 0.0f, 0.25f, 1.0f, 0.0f };
+    GLfloat lgt_dir[4]={ 0, 0.25f, 1.f, 0 };
     glLightfv(GL_LIGHT0,GL_POSITION, lgt_dir);  // note: uses model matrix
 
     gluLookAt(centre[0] - 0.866 * maxdist, centre[1] + 0.5 * maxdist, centre[2] - 0.5 * maxdist,

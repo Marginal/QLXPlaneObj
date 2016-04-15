@@ -31,14 +31,31 @@ static CFDataRef data[kTexRoleCount];   // We're using GL_UNPACK_CLIENT_STORAGE_
 #endif
 
 
+GLuint BlankTex()
+{
+    static GLuint target;
+
+    if (!target)
+    {
+        UInt8 color[4] = { 0xdf, 0xdf, 0xdf, 0xff };
+        glGenTextures(1, &target);
+        glBindTexture(GL_TEXTURE_2D, target);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, &color);
+        ASSERT_GL;
+    }
+    return target;
+}
+
+
 GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
 {
-    if (! *texname || role >= kTexRoleCount)
-        return 0;
-
     char *fixedname;
-    if (!(fixedname = malloc(strlen(texname)+1)))
-        return 0;
+    if (role >= kTexRoleCount ||
+        ! *texname ||
+        !(fixedname = malloc(strlen(texname)+1)))
+        return BlankTex();
 
     // POSIXify texture name
     const char *s;
@@ -58,8 +75,7 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     // cached?
     NSURL *ddsfilename = [basename URLByAppendingPathExtension:@"dds"];
     NSURL *pngfilename = [basename URLByAppendingPathExtension:@"png"];
-    if (role < kTexRoleCount &&
-        targets[role] &&
+    if (targets[role] &&
         ([filenames[role] isEqual:ddsfilename] || [filenames[role] isEqual:pngfilename]))
         return targets[role];
 
@@ -144,7 +160,7 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
 
         UInt8 *uncompressed;
         if (!(uncompressed = malloc(width * height * 4)))
-            return 0;
+            return BlankTex();
 
         if (!targets[role])
             glGenTextures(1, &targets[role]);
@@ -180,17 +196,17 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
 
     CGImageSourceRef imagesource = CGImageSourceCreateWithURL((__bridge CFURLRef) pngfilename, NULL);
     if (!imagesource)
-        return 0;
+        return BlankTex();
 
     CGImageRef image = CGImageSourceCreateImageAtIndex(imagesource, 0, NULL);
     CFRelease(imagesource);
     if (!image)
-        return 0;
+        return BlankTex();
 
     CFDataRef pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image));
     CGImageRelease(image);
     if (!pngdata)
-        return 0;
+        return BlankTex();
 
     if (!targets[role])
         glGenTextures(1, &targets[role]);

@@ -27,7 +27,7 @@ extern "C" {
 # define ASSERT_GL ((void)0)
 #endif
 
-int context_setup(GLsizei width, GLsizei height, float minCoords[3], float maxCoords[3]);
+int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoords[3], float maxCoords[3]);
 void context_destroy();
 GLint *context_buffer();
 
