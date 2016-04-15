@@ -543,6 +543,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -565,7 +566,6 @@
 					"$(PROJECT_DIR)/mesa/src/mesa/drivers/osmesa/.libs",
 					"$(PROJECT_DIR)/mesa/src/mapi/shared-glapi/.libs",
 				);
-				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PREBINDING = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.xplaneobj.qlgenerator;
 				PRODUCT_NAME = XPlaneObj;
@@ -577,6 +577,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -597,7 +598,6 @@
 					"$(PROJECT_DIR)/mesa/src/mesa/drivers/osmesa/.libs",
 					"$(PROJECT_DIR)/mesa/src/mapi/shared-glapi/.libs",
 				);
-				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PREBINDING = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.xplaneobj.qlgenerator;
 				PRODUCT_NAME = XPlaneObj;
@@ -636,7 +636,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/app/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.qlxplaneobj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -669,7 +668,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/app/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.org.marginal.qlxplaneobj;
 				PRODUCT_NAME = "$(TARGET_NAME)";

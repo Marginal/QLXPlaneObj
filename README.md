@@ -1,7 +1,7 @@
 QuickLook XPlane Object
 =======================
 
-This package allows OSX Finder to display thumbnails and QuickLook previews for [X-Plane](http://www.x-plane.com) 3D Object files.
+This package allows Finder on OSX 10.7 and later to display thumbnails and QuickLook previews for [X-Plane](http://www.x-plane.com) 3D Object files.
 
 Installation
 ------------
@@ -25,11 +25,6 @@ Uninstall
 
 * Press Enter.
 * Type your password and press Enter.
-
-Limitations
------------
-* Requires OSX 10.7 or later.
-* Objects may be shown untextured under OSX 10.7-10.9 due to sandbox limitations on the QuickLook daemon.
 
 Acknowledgements
 ----------------
