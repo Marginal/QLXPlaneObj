@@ -117,6 +117,9 @@ static char *trim(char *c)
               ((file = strtok_r(NULL, WHSP, &brktoken))))
              ))
         {
+            for (char *c=file; *c; c++)
+                if (*c=='\\' || *c==':')
+                    *c = '/';
             NSString *key = [base stringByAppendingPathComponent:[[NSString stringWithUTF8String:file] lowercaseString]];
             NSMutableSet *entry = contents[key];
             if (!entry)
