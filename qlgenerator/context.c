@@ -182,11 +182,11 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     double hFOV = 1 / tan((vFOV/2) * (M_PI/180) * (double) width / (double) height);
-    float centre[3] = { (maxCoords[0] + minCoords[0]) / 2, minCoords[1] + (maxCoords[1] + minCoords[1]) * 0.4, (maxCoords[2] + minCoords[2]) / 2 };
+    float centre[3] = { (maxCoords[0] + minCoords[0]) / 2, minCoords[1] + (maxCoords[1] - minCoords[1]) * 0.4, (maxCoords[2] + minCoords[2]) / 2 };
     float size[3] = { (maxCoords[0] - minCoords[0]), (maxCoords[1] - minCoords[1]), (maxCoords[2] - minCoords[2]) };
     float dist[3] =
     {
-        size[1] * 0.6 / tan((vFOV/2) * (M_PI/180)),    // arbitrary height factor
+        ((size[1] + (size[0] * 0.25)) * 0.65) / tan((vFOV/2) * (M_PI/180)),    // arbitrary height factor
         (size[2] * 0.443 + size[0] * 0.25) * hFOV,      // width at 30deg / 2
         (size[0] * 0.443 + size[2] * 0.25) * hFOV       // depth at 60deg / 2
     };
