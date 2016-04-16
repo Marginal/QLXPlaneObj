@@ -12,7 +12,7 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.laminar.obj</string>
-				<string>public.3d-content</string>
+				<string>public.geometry-definition-format</string>
 			</array>
 		</dict>
 	</array>
