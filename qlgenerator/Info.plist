@@ -61,6 +61,6 @@
 	<key>QLSupportsConcurrentRequests</key>
 	<true/>		<!-- but allow multiple helper processes -->
 	<key>QLThumbnailMinimumSize</key>
-	<integer>16</integer>
+	<integer>0</integer>
 </dict>
 </plist>
