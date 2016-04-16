@@ -153,6 +153,7 @@ static	ObjDrawFuncs10_t sCallbacks =
         info.pan = LoadTex(kTexPanelRole, objfile, "cockpit_3d/-PANELS-/Panel_Preview.png");
         ObjDraw(mObj, 0.f, &sCallbacks, &info);
     }
+    glFlush();
     ASSERT_GL;
 
 #if APL
