@@ -119,7 +119,7 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         glCullFace(GL_BACK);
         glFrontFace(GL_CW);
         glDepthFunc(GL_LEQUAL);
-        glAlphaFunc(GL_GREATER, 0.f);
+        glAlphaFunc(GL_GREATER, 0.5f);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// assumes not pre-multiplied - but see http://stackoverflow.com/questions/24346585/opengl-render-to-texture-with-partial-transparancy-translucency-and-then-rende
 
         glEnable(GL_LIGHT0);
@@ -202,7 +202,7 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_ALPHA_TEST);
+    glDisable(GL_ALPHA_TEST);	// X-Plane defaults to ATTR_blend
     glEnable(GL_BLEND);
     glDisable(GL_POLYGON_OFFSET_FILL);
     glPolygonOffset(0.0, 0.0);
