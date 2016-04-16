@@ -13,8 +13,21 @@
 
    ----------------------------------------------------------------------------- */
 
-extern "C"
+extern "C" {
+
+// Undocumented options
+const CFStringRef kQLPreviewOptionModeKey = CFSTR("QLPreviewMode");
+
+typedef NS_ENUM(NSInteger, QLPreviewMode)
 {
+    kQLPreviewNoMode		= 0,
+    kQLPreviewGetInfoMode	= 1,	// File -> Get Info and Column view in Finder
+    kQLPreviewPrefetchMode	= 2,	// Be ready for QuickLook (called for selected file in Finder's Cover Flow view)
+    kQLPreviewUnknownMode	= 3,
+    kQLPreviewSpotlightMode	= 4,	// Desktop Spotlight search popup bubble
+    kQLPreviewQuicklookMode	= 5,	// File -> Quick Look in Finder (also qlmanage -p)
+};
+
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
@@ -36,7 +49,12 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             return kQLReturnNoError;
         }
 
-        CGSize size = CGSizeMake(800, 600);
+        CGSize size;
+        if ([(NSNumber*)((__bridge NSDictionary*)options)[(__bridge NSString*)kQLPreviewOptionModeKey] intValue] == kQLPreviewQuicklookMode)
+            size = CGSizeMake(800, 600);    // Standard QuickLook view - displayed at this size
+        else
+            size = CGSizeMake(512, 512);    // Some other context - caller will resize
+
         CGImageRef image = [obj CreateImageWithSize:size];
         if (!image || QLPreviewRequestIsCancelled(preview))
         {
