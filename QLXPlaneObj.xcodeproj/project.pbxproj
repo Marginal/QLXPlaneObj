@@ -30,6 +30,7 @@
 		ABB89DEE1CBCB545006C0D48 /* schema.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABB89DEC1CBCB545006C0D48 /* schema.strings */; };
 		ABB89DF21CBD29C2006C0D48 /* revlib.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB89DF11CBD29C2006C0D48 /* revlib.m */; };
 		ABD434BF1A2D6AF900ED8B26 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8A4AA41A22FBB0002E5A59 /* QuickLook.framework */; };
+		ABD8EB041CD3AD5E0045F7A8 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD8EB021CD3A3030045F7A8 /* CoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +90,6 @@
 		AB6DA91D1CB7D8D7000279A4 /* context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = context.h; sourceTree = "<group>"; };
 		AB6DA91F1CB8287B000279A4 /* ObjUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjUtils.cpp; sourceTree = "<group>"; };
 		AB6DA9201CB8287B000279A4 /* ObjUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjUtils.h; sourceTree = "<group>"; };
-		AB6DA92C1CB8C3D0000279A4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AB6DA92E1CB94163000279A4 /* glu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glu.c; sourceTree = "<group>"; };
 		AB6DA92F1CB94163000279A4 /* glu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glu.h; sourceTree = "<group>"; };
 		AB8A4A2D1A22DFB6002E5A59 /* GeneratePreviewForURL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GeneratePreviewForURL.mm; sourceTree = "<group>"; };
@@ -112,6 +112,7 @@
 		ABB89DED1CBCB545006C0D48 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/schema.strings; sourceTree = "<group>"; };
 		ABB89DF11CBD29C2006C0D48 /* revlib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = revlib.m; sourceTree = "<group>"; };
 		ABB89DF31CBD29E2006C0D48 /* revlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = revlib.h; sourceTree = "<group>"; };
+		ABD8EB021CD3A3030045F7A8 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = ../../../../../../../../../System/Library/Frameworks/CoreServices.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB6DA9291CB82FB3000279A4 /* Foundation.framework in Frameworks */,
+				ABD8EB041CD3AD5E0045F7A8 /* CoreServices.framework in Frameworks */,
 				AB9BEDC21CCCF454007A5C3B /* OpenGL.framework in Frameworks */,
 				AB6DA9281CB82F98000279A4 /* ApplicationServices.framework in Frameworks */,
 				AB6DA9271CB82F88000279A4 /* CoreFoundation.framework in Frameworks */,
@@ -231,9 +233,9 @@
 		ABAB4CFF1A238C6000B1BD18 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				AB6DA92C1CB8C3D0000279A4 /* CoreGraphics.framework */,
 				AB8A4AD81A22FD09002E5A59 /* ApplicationServices.framework */,
 				AB8A4A961A22FAED002E5A59 /* CoreFoundation.framework */,
+				ABD8EB021CD3A3030045F7A8 /* CoreServices.framework */,
 				AB60480E1A2691E900D39FDE /* Foundation.framework */,
 				AB6DA8EE1CB60C27000279A4 /* OpenGL.framework */,
 				AB8A4AA41A22FBB0002E5A59 /* QuickLook.framework */,
@@ -451,7 +453,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CODE_SIGN_FLAGS = "";
 				WARNING_CFLAGS = "-Winline";
@@ -479,7 +481,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_UNROLL_LOOPS = YES;
 				HEADER_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CODE_SIGN_FLAGS = "";
 				WARNING_CFLAGS = "-Winline";

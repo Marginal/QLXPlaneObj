@@ -16,6 +16,7 @@
 # include <OpenGL/OpenGL.h>
 # include <OpenGL/CGLTypes.h>
 # include <OpenGL/glu.h>
+# include <CoreServices/CoreServices.h>
 #else
 # include <GL/gl.h>
 # include <GL/osmesa.h>
@@ -65,7 +66,7 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
 
         CGLPixelFormatAttribute attributes[] =
         {
-            kCGLPFAOpenGLProfile, (CGLPixelFormatAttribute) kCGLOGLPVersion_Legacy,   // Need legacy profile for immediate mode
+            kCGLPFAOpenGLProfile, (CGLPixelFormatAttribute) kCGLOGLPVersion_Legacy,   // Need legacy profile for immediate mode. Must be first for following code
             kCGLPFARemotePBuffer,	// Need a context that allows us to draw in the absence of a connection to the Window Server (otherwise kCGLBadConnection)
             kCGLPFAAllowOfflineRenderers,   // Allow headless
             kCGLPFASingleRenderer,  // Don't need to switch between displays
@@ -74,14 +75,19 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
             kCGLPFADepthSize, 24,   // must be last for the following code
             0
         };
+        SInt32 versMaj, versMin;
+        Gestalt(gestaltSystemVersionMajor, &versMaj);
+        Gestalt(gestaltSystemVersionMinor, &versMin);
+        CGLPixelFormatAttribute *attrs = versMaj > 10 || versMin > 6 ? attributes : attributes + 2;	// kCGLPFAOpenGLProfile is not supported on 10.6
+
         CGLError errorCode;
         CGLPixelFormatObj pix;
         GLint npix;
 
-        if ((errorCode = CGLChoosePixelFormat(attributes, &pix, &npix)) || !npix)   // Can get zero available pixel formats but no error
+        if ((errorCode = CGLChoosePixelFormat(attrs, &pix, &npix)) || !npix)   // Can get zero available pixel formats but no error
         {
             // try with smaller depth buffer
-            attributes[sizeof(attributes)/sizeof(CGLPixelFormatAttribute)-2] = 16;
+            attributes[sizeof(attrs)/sizeof(CGLPixelFormatAttribute)-2] = 16;
             errorCode = CGLChoosePixelFormat(attributes, &pix, &npix);
         }
 
