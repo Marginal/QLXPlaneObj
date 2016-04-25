@@ -154,7 +154,8 @@ static	ObjDrawFuncs10_t sCallbacks =
         ObjDraw(mObj, 0.f, &sCallbacks, &info);
     }
 
-    unsigned *img_data = context_read_buffer();
+    size_t width, height;
+    unsigned *img_data = context_read_buffer(&width, &height);
     if (!img_data)
         return NULL;
 
@@ -163,7 +164,7 @@ static	ObjDrawFuncs10_t sCallbacks =
     // https://developer.apple.com/Library/mac/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html
 
     CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(img_data, size.width, size.height, 8, size.width * 4, rgb, kCGBitmapByteOrder32Host | kCGImageAlphaPremultipliedFirst);
+    CGContextRef context = CGBitmapContextCreate(img_data, width, height, 8, width * 4, rgb, kCGBitmapByteOrder32Host | kCGImageAlphaPremultipliedFirst);
     CGColorSpaceRelease(rgb);
     CGImageRef image = NULL;
     if (context)
@@ -172,7 +173,6 @@ static	ObjDrawFuncs10_t sCallbacks =
         CGContextRelease(context);
     }
 
-    context_free_buffer();
     return image;
 }
 

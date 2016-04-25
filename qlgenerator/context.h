@@ -29,8 +29,7 @@ extern "C" {
 
 int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoords[3], float maxCoords[3]);
 void context_destroy();
-unsigned *context_read_buffer();
-void context_free_buffer();
+unsigned *context_read_buffer(size_t *width, size_t *height);
 
 #ifdef __cplusplus
 }   // extern "C"
