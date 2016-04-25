@@ -204,10 +204,40 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     if (!image)
         return BlankTex();
 
-    CFDataRef pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image));
-    CGImageRelease(image);
-    if (!pngdata)
+    CFDataRef pngdata;
+    GLsizei width = CGImageGetWidth(image);
+    GLsizei height = CGImageGetHeight(image);
+    CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
+    CGColorSpaceModel colormodel = CGColorSpaceGetModel(colorspace);
+    size_t bpp = CGImageGetBitsPerPixel(image);
+    if (colormodel == kCGColorSpaceModelIndexed && bpp == 8 && CGColorSpaceGetModel(CGColorSpaceGetBaseColorSpace(colorspace)) == kCGColorSpaceModelRGB)
+    {
+        // palletized FFS
+        unsigned char palette[257 * 3];
+        unsigned *unpacked;
+        CFDataRef packed;
+        if (!(unpacked = malloc(width * height * 4)) ||
+            !(packed = CGDataProviderCopyData(CGImageGetDataProvider(image))))
+        {
+            CGImageRelease(image);
+            return BlankTex();
+        }
+
+        // convert to RGBA
+        const unsigned char *packeddata = CFDataGetBytePtr(packed);
+        CGColorSpaceGetColorTable(colorspace, palette);
+        for (int i=0; i < width * height; i++)
+            unpacked[i] = (* (unsigned*) (palette + (packeddata[i]*3))) | 0xff000000;
+
+        CFRelease(packed);
+        pngdata = CFDataCreateWithBytesNoCopy(NULL, (UInt8*) unpacked, width * height * 4, kCFAllocatorMalloc);
+    }
+    else if (colormodel != kCGColorSpaceModelRGB || bpp != 32 || !(pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image))))
+    {
+        CGImageRelease(image);
         return BlankTex();
+    }
+    CGImageRelease(image);
 
     if (!targets[role])
         glGenTextures(1, &targets[role]);
@@ -221,7 +251,7 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, CGImageGetWidth(image), CGImageGetHeight(image), 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, CFDataGetBytePtr(pngdata));
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, CFDataGetBytePtr(pngdata));
     ASSERT_GL;
 
     filenames[role] = ddsfilename;
