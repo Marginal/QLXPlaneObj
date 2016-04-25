@@ -30,11 +30,11 @@ static CGLContextObj ctx;
 static GLuint framebuffer, texture, depth;
 #else
 static OSMesaContext ctx;
-GLint *framebuffer;
 #endif
 
 static int failed;
 static GLsizei fbo_width, fbo_height;
+static unsigned *img_data;
 
 
 // Setup OpenGL context. Returns non-zero on error.
@@ -53,6 +53,7 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         CGLPixelFormatAttribute attributes[] =
         {
             kCGLPFAOpenGLProfile, (CGLPixelFormatAttribute) kCGLOGLPVersion_Legacy,   // Need legacy profile for immediate mode
+            kCGLPFARemotePBuffer,	// Need a context that allows us to draw in the absence of a connection to the Window Server
             kCGLPFAAlphaSize, (CGLPixelFormatAttribute) 8,
             kCGLPFADepthSize, (CGLPixelFormatAttribute) 24,     // In practice get 24
             (CGLPixelFormatAttribute) 0
@@ -85,6 +86,7 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
@@ -107,9 +109,9 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
 #else   // !APL
         fbo_width  = width;
         fbo_height = height;
-        if (!(framebuffer = malloc(fbo_width * fbo_height * 4)) ||
+        if (!(img_data = malloc(fbo_width * fbo_height * 4)) ||
             !(ctx = OSMesaCreateContextExt(OSMESA_BGRA, 32, 0, 0, NULL)) ||
-            !OSMesaMakeCurrent(ctx, framebuffer, GL_UNSIGNED_BYTE, fbo_width, fbo_height))
+            !OSMesaMakeCurrent(ctx, img_data, GL_UNSIGNED_BYTE, fbo_width, fbo_height))
             return failed;
         OSMesaPixelStore(OSMESA_Y_UP, 0);	// So we don't have to flip the finished image
 #endif
@@ -165,10 +167,10 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         {
             fbo_width  = width;
             fbo_height = height;
-            if (!(framebuffer = reallocf(framebuffer, fbo_width * fbo_height * 4)))
+            if (!(img_data = reallocf(img_data, fbo_width * fbo_height * 4)))
                 return failed;
         }
-        if (!OSMesaMakeCurrent(ctx, framebuffer, GL_UNSIGNED_BYTE, fbo_width, fbo_height))
+        if (!OSMesaMakeCurrent(ctx, img_data, GL_UNSIGNED_BYTE, fbo_width, fbo_height))
             return failed;
         glViewport(0, 0, width, height);
         ASSERT_GL;
@@ -258,17 +260,49 @@ void context_destroy()
     CGLSetCurrentContext(NULL);
     CGLDestroyContext(ctx);
 #else
-    free(framebuffer);
     OSMesaDestroyContext(ctx);
 #endif
     ctx = NULL;
+    free(img_data);
+    img_data = NULL;
     failed = 0;
 }
 
 
-#if !APL
-GLint *context_buffer()
+unsigned *context_read_buffer()
 {
-    return framebuffer;
-}
+    glFlush();
+    ASSERT_GL;
+
+#if APL
+    free(img_data);
+    if (!(img_data = malloc(fbo_width * fbo_height * 4)))
+        return NULL;
+
+    glReadBuffer(GL_COLOR_ATTACHMENT0);
+    glReadPixels(0, 0, fbo_width, fbo_height, GL_BGRA, GL_UNSIGNED_BYTE, img_data);
+    // flip
+    unsigned *y0, *y1, stride = fbo_width;
+    for (unsigned *y0 = img_data, *y1 = img_data + ((fbo_height - 1) * stride); y0 < y1; y0 += stride, y1 -= stride)
+    {
+        unsigned *x0, *x1, tmp;
+        for (x0 = y0, x1 = y1; x0 < y0 + stride; x0++, x1++)
+        {
+            tmp = *x0;
+            *x0 = *x1;
+            *x1 = tmp;
+        }
+    }
 #endif
+    return img_data;
+}
+
+
+void context_free_buffer()
+{
+#if APL
+    free(img_data);
+    img_data = NULL;
+#endif
+}
+

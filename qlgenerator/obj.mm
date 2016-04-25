@@ -153,31 +153,10 @@ static	ObjDrawFuncs10_t sCallbacks =
         info.pan = LoadTex(kTexPanelRole, objfile, "cockpit_3d/-PANELS-/Panel_Preview.png");
         ObjDraw(mObj, 0.f, &sCallbacks, &info);
     }
-    glFlush();
-    ASSERT_GL;
 
-#if APL
-    UInt32 *img_data;
-    if (!(img_data = (UInt32 *) malloc(size.width * size.height * 4)))
+    unsigned *img_data = context_read_buffer();
+    if (!img_data)
         return NULL;
-
-    glReadBuffer(GL_COLOR_ATTACHMENT0);
-    glReadPixels(0, 0, size.width, size.height, GL_BGRA, GL_UNSIGNED_BYTE, img_data);
-    // flip
-    UInt32 *y0, *y1, stride = size.width;
-    for (UInt32 *y0 = img_data, *y1 = img_data + (((UInt32) size.height - 1) * stride); y0 < y1; y0 += stride, y1 -= stride)
-    {
-        UInt32 *x0, *x1, tmp;
-        for (x0 = y0, x1 = y1; x0 < y0 + stride; x0++, x1++)
-        {
-            tmp = *x0;
-            *x0 = *x1;
-            *x1 = tmp;
-        }
-    }
-#else
-    GLint *img_data = context_buffer();
-#endif
 
     // Wangle into a CGImage via a CGBitmapContext
     // OSX wants premultiplied alpha. See "Supported Pixel Formats" at
@@ -193,9 +172,7 @@ static	ObjDrawFuncs10_t sCallbacks =
         CGContextRelease(context);
     }
 
-#if APL
-    free(img_data);
-#endif
+    context_free_buffer();
     return image;
 }
 

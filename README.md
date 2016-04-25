@@ -29,8 +29,6 @@ Uninstall
 Acknowledgements
 ----------------
 * Uses [xptools](https://github.com/X-Plane/xptools) © Laminar Research, licensed under the MIT/X11 license.
-* Uses [QLdds](https://github.com/Marginal/QLdds) © Jonathan Harris, licensed under the GPL version 2 or later.
-* Uses [Mesa](http://mesa3d.org/) © Brian Paul et al, licensed under the MIT license.
 * Packaged using [Packages](http://s.sudre.free.fr/Software/Packages/about.html).
 
 License
