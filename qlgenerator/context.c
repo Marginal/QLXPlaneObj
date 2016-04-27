@@ -65,10 +65,13 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         CGLPixelFormatAttribute attributes[] =
         {
             kCGLPFAOpenGLProfile, (CGLPixelFormatAttribute) kCGLOGLPVersion_Legacy,   // Need legacy profile for immediate mode
-            kCGLPFARemotePBuffer,	// Need a context that allows us to draw in the absence of a connection to the Window Server
-            kCGLPFAAlphaSize, (CGLPixelFormatAttribute) 8,
-            kCGLPFADepthSize, (CGLPixelFormatAttribute) 24,     // In practice get 24
-            (CGLPixelFormatAttribute) 0
+            kCGLPFARemotePBuffer,	// Need a context that allows us to draw in the absence of a connection to the Window Server (otherwise kCGLBadConnection)
+            kCGLPFAAllowOfflineRenderers,   // Allow headless
+            kCGLPFASingleRenderer,  // Don't need to switch between displays
+            kCGLPFAColorSize, 32,
+            kCGLPFAAlphaSize, 8,
+            kCGLPFADepthSize, 24,   // must be last for the following code
+            0
         };
         CGLError errorCode;
         CGLPixelFormatObj pix;
