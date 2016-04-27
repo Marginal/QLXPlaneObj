@@ -9,6 +9,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <math.h>
+#include <sys/syslog.h>
 
 #if APL
 # include <OpenGL/gl.h>
@@ -76,18 +77,59 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         CGLError errorCode;
         CGLPixelFormatObj pix;
         GLint npix;
-        if ((errorCode = CGLChoosePixelFormat(attributes, &pix, &npix)))
-            return errorCode;
 
-        if ((errorCode = CGLCreateContext(pix, NULL, &ctx)))
+        if ((errorCode = CGLChoosePixelFormat(attributes, &pix, &npix)) || !npix)   // Can get zero available pixel formats but no error
         {
-            CGLDestroyPixelFormat(pix);
-            return errorCode;
+            // try with smaller depth buffer
+            attributes[sizeof(attributes)/sizeof(CGLPixelFormatAttribute)-2] = 16;
+            errorCode = CGLChoosePixelFormat(attributes, &pix, &npix);
         }
-        CGLDestroyPixelFormat(pix);
 
-        if ((errorCode = CGLSetCurrentContext(ctx)))
-            return errorCode;
+        if (errorCode || !npix ||
+            (errorCode = CGLCreateContext(pix, NULL, &ctx)) ||
+            (errorCode = CGLSetCurrentContext(ctx)))
+        {
+            syslog(LOG_WARNING, !npix ? "XPlaneObj: Can't get a pixel format: %s (%d)" : "XPlaneObj: Can't create context: %s (%d)", CGLErrorString(errorCode), errorCode);
+
+            // https://developer.apple.com/library/mac/qa/qa1168/_index.html
+            GLint nrend = 0;
+            CGLRendererInfoObj rend;
+            CGLQueryRendererInfo(-1, &rend, &nrend);
+            for(GLint i = 0; i < nrend; i++)
+            {
+                GLint re, on, dp, ac, os, cm, dm, vm, tm;
+                CGLDescribeRenderer(rend, i, kCGLRPRendererID, &re);
+                CGLDescribeRenderer(rend, i, kCGLRPOnline, &on);
+                CGLDescribeRenderer(rend, i, kCGLRPDisplayMask, &dp);
+                CGLDescribeRenderer(rend, i, kCGLRPAccelerated, &ac);
+                CGLDescribeRenderer(rend, i, kCGLRPOffScreen, &os);
+                CGLDescribeRenderer(rend, i, kCGLRPColorModes, &cm);
+                CGLDescribeRenderer(rend, i, kCGLRPDepthModes, &dm);
+                CGLDescribeRenderer(rend, i, kCGLRPVideoMemory, &vm);
+                CGLDescribeRenderer(rend, i, kCGLRPTextureMemory, &tm);
+                syslog(LOG_NOTICE, "XPlaneObj: Renderer:%d, ID:0x%x, online:%d, displays:0x%x, accelerated:%d, off-screen:%d, colormodes:0x%08x, depthmodes:0x%08x, vmem:%d, tmem:%d", i, re & kCGLRendererIDMatchingMask, on, dp, ac, os, cm, dm, vm, tm);
+            }
+            CGLDestroyRendererInfo(rend);
+
+            if (npix)
+            {
+                GLint re, ac, os, c, a, d;
+                CGLDescribePixelFormat(pix, 0, kCGLPFARendererID, &re);
+                CGLDescribePixelFormat(pix, 0, kCGLPFAAccelerated, &ac);
+                CGLDescribePixelFormat(pix, 0, kCGLPFAOffScreen, &os);
+                CGLDescribePixelFormat(pix, 0, kCGLPFAColorSize, &c);
+                CGLDescribePixelFormat(pix, 0, kCGLPFAAlphaSize, &a);
+                CGLDescribePixelFormat(pix, 0, kCGLPFADepthSize, &d);
+                syslog(LOG_NOTICE, "XPlaneObj: #Formats:%d, ID:0x%x, accelerated:%d, off-screen:0x%x, colors:%d, alpha:%d, depth:%d", npix, re & kCGLRendererIDMatchingMask, ac, os, c, a, d);
+                CGLDestroyPixelFormat(pix);
+                if (ctx)
+                    CGLReleaseContext(ctx);
+            }
+
+            return failed;
+        }
+
+        CGLDestroyPixelFormat(pix);
 
         // Set up FBO for rendering into texture unit 0
         glGenFramebuffers(1, &framebuffer);
@@ -149,9 +191,11 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
     else    // Use existing context
 #if APL
     {
-        CGLError errorCode;
-        if ((errorCode = CGLSetCurrentContext(ctx)))
-            return errorCode;
+        if (CGLSetCurrentContext(ctx))
+        {
+            CGLReleaseContext(ctx);
+            return failed;
+        }
 
         if (img_width > fbo_width || img_height > fbo_height)   // Don't bother shrinking FBO - we'll probably need the larger size again soon
         {
@@ -271,7 +315,7 @@ void context_destroy()
     glDeleteRenderbuffers(1, &depth);
 
     CGLSetCurrentContext(NULL);
-    CGLDestroyContext(ctx);
+    CGLReleaseContext(ctx);
 #else
     OSMesaDestroyContext(ctx);
 #endif
@@ -288,6 +332,7 @@ unsigned *context_read_buffer(size_t *width, size_t *height)
     ASSERT_GL;
 
 #if APL
+    // don't bother with a PBO - there's nothing that we can usefully do while waiting for the download
     glReadBuffer(GL_COLOR_ATTACHMENT0);
     glReadPixels(0, 0, img_width, img_height, GL_BGRA, GL_UNSIGNED_BYTE, img_data);
     // flip

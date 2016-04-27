@@ -125,13 +125,8 @@ static	ObjDrawFuncs10_t sCallbacks =
     if (mIsObj8)
     {
         GetObjDimensions8(mObj8, mins, maxs);
-        if (int err = context_setup(-1, size.width, size.height, mins, maxs))
-        {
-#ifdef DEBUG
-            NSLog(@"XPlaneOBJ Can't set up context, err = %#x", err);
-#endif
+        if (context_setup(-1, size.width, size.height, mins, maxs))
             return NULL;
-        }
         info.blank = BlankTex();
         info.tex = LoadTex(kTexPrimaryRole, objfile, mObj8.texture.c_str());
         info.drp = LoadTex(kTexDrapedRole, objfile, mObj8.texture_draped.c_str());
@@ -141,13 +136,8 @@ static	ObjDrawFuncs10_t sCallbacks =
     else
     {
         GetObjDimensions(mObj, mins, maxs);
-        if (int err = context_setup(0, size.width, size.height, mins, maxs))
-        {
-#ifdef DEBUG
-            NSLog(@"XPlaneOBJ Can't set up context, err = %#x", err);
-#endif
+        if (context_setup(0, size.width, size.height, mins, maxs))
             return NULL;
-        }
         info.blank = BlankTex();
         info.tex = LoadTex(kTexPrimaryRole, objfile, mObj.texture.c_str());
         info.pan = LoadTex(kTexPanelRole, objfile, "cockpit_3d/-PANELS-/Panel_Preview.png");
