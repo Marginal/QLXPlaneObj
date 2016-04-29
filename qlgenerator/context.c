@@ -72,7 +72,7 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
             kCGLPFASingleRenderer,  // Don't need to switch between displays
             kCGLPFAColorSize, 32,
             kCGLPFAAlphaSize, 8,
-            kCGLPFADepthSize, 24,   // must be last for the following code
+            kCGLPFADepthSize, 24,   // Everyone supports 24bit http://web.archive.org/web/20120101172948/http://developer.apple.com/graphicsimaging/opengl/capabilities/GLInfo_1068.html
             0
         };
         SInt32 versMaj, versMin;
@@ -83,15 +83,8 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
         CGLError errorCode;
         CGLPixelFormatObj pix;
         GLint npix;
-
-        if ((errorCode = CGLChoosePixelFormat(attrs, &pix, &npix)) || !npix)   // Can get zero available pixel formats but no error
-        {
-            // try with smaller depth buffer
-            attributes[sizeof(attrs)/sizeof(CGLPixelFormatAttribute)-2] = 16;
-            errorCode = CGLChoosePixelFormat(attributes, &pix, &npix);
-        }
-
-        if (errorCode || !npix ||
+        if ((errorCode = CGLChoosePixelFormat(attrs, &pix, &npix)) ||
+            !npix ||   // Can get zero available pixel formats but no error
             (errorCode = CGLCreateContext(pix, NULL, &ctx)) ||
             (errorCode = CGLSetCurrentContext(ctx)))
         {
