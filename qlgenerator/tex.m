@@ -194,6 +194,7 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
 
     // PNG loader
     // https://developer.apple.com/library/mac/documentation/GraphicsImaging/Conceptual/OpenGL-MacProgGuide/opengl_texturedata/opengl_texturedata.html
+    // https://developer.apple.com/library/ios/samplecode/GLImageProcessing/Listings/Texture_m.html
 
     CGImageSourceRef imagesource = CGImageSourceCreateWithURL((__bridge CFURLRef) pngfilename, NULL);
     if (!imagesource)
@@ -232,8 +233,11 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         CFRelease(packed);
         pngdata = CFDataCreateWithBytesNoCopy(NULL, (UInt8*) unpacked, width * height * 4, kCFAllocatorMalloc);
     }
-    else if (colormodel != kCGColorSpaceModelRGB || bpp != 32 || !(pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image))))
+    else if (colormodel != kCGColorSpaceModelRGB ||
+             (bpp != 24 && bpp != 32) ||
+             !(pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image))))
     {
+        NSLog(@"XPlaneObj: model:%d bpp:%zu %@", colormodel, bpp, pngfilename);
         CGImageRelease(image);
         return BlankTex();
     }
@@ -251,7 +255,7 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, CFDataGetBytePtr(pngdata));
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, bpp == 24 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, CFDataGetBytePtr(pngdata));
     ASSERT_GL;
 
     filenames[role] = ddsfilename;
