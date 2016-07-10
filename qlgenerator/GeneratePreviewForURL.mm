@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, QLPreviewMode)
 {
     kQLPreviewNoMode		= 0,
     kQLPreviewGetInfoMode	= 1,	// File -> Get Info and Column view in Finder
-    kQLPreviewPrefetchMode	= 2,	// Be ready for QuickLook (called for selected file in Finder's Cover Flow view)
+    kQLPreviewCoverFlowMode	= 2,	// Be ready for QuickLook (called for selected file in Finder's Cover Flow view)
     kQLPreviewUnknownMode	= 3,
     kQLPreviewSpotlightMode	= 4,	// Desktop Spotlight search popup bubble
     kQLPreviewQuicklookMode	= 5,	// File -> Quick Look in Finder (also qlmanage -p)
@@ -50,10 +50,19 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         }
 
         CGSize size;
+        CGSize render;
+        NSDictionary *properties = NULL;
         if ([(NSNumber*)((__bridge NSDictionary*)options)[(__bridge NSString*)kQLPreviewOptionModeKey] intValue] == kQLPreviewQuicklookMode)
-            size = CGSizeMake(800, 600);    // Standard QuickLook view - displayed at this size
+        {
+            // Standard QuickLook view
+            render = CGSizeMake(1600, 1200);        // render at this size
+            size   = CGSizeMake( 800,  600);        // downscale / antalias to this size
+        }
         else
-            size = CGSizeMake(512, 512);    // Some other context - caller will resize
+        {
+            // Some other context
+            render = size = CGSizeMake(1024, 1024); // caller will downscale as necessary
+        }
 
         CGImageRef image = [obj newImageWithSize:render];
         if (!image || QLPreviewRequestIsCancelled(preview))
@@ -63,8 +72,8 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             return kQLReturnNoError;
         }
 
-        CGContextRef context = QLPreviewRequestCreateContext(preview, CGSizeMake(CGImageGetWidth(image), CGImageGetHeight(image)), true, NULL);
-        CGContextDrawImage(context, CGRectMake(0, 0, CGImageGetWidth(image), CGImageGetHeight(image)), image);
+        CGContextRef context = QLPreviewRequestCreateContext(preview, size, true, NULL);
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height) , image);
         QLPreviewRequestFlushContext(preview, context);
         CGContextRelease(context);
 
