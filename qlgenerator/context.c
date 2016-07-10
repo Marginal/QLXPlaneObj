@@ -66,7 +66,6 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
 
         CGLPixelFormatAttribute attributes[] =
         {
-            kCGLPFAOpenGLProfile, (CGLPixelFormatAttribute) kCGLOGLPVersion_Legacy,   // Need legacy profile for immediate mode. Must be first for following code
             kCGLPFARemotePBuffer,	// Need a context that allows us to draw in the absence of a connection to the Window Server (otherwise kCGLBadConnection)
             kCGLPFAAllowOfflineRenderers,   // Allow headless
             kCGLPFASingleRenderer,  // Don't need to switch between displays
@@ -75,15 +74,11 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
             kCGLPFADepthSize, 24,   // Everyone supports 24bit http://web.archive.org/web/20120101172948/http://developer.apple.com/graphicsimaging/opengl/capabilities/GLInfo_1068.html
             0
         };
-        SInt32 versMaj, versMin;
-        Gestalt(gestaltSystemVersionMajor, &versMaj);
-        Gestalt(gestaltSystemVersionMinor, &versMin);
-        CGLPixelFormatAttribute *attrs = versMaj > 10 || versMin > 6 ? attributes : attributes + 2;	// kCGLPFAOpenGLProfile is not supported on 10.6
 
         CGLError errorCode;
         CGLPixelFormatObj pix;
         GLint npix;
-        if ((errorCode = CGLChoosePixelFormat(attrs, &pix, &npix)) ||
+        if ((errorCode = CGLChoosePixelFormat(attributes, &pix, &npix)) ||
             !npix ||   // Can get zero available pixel formats but no error
             (errorCode = CGLCreateContext(pix, NULL, &ctx)) ||
             (errorCode = CGLSetCurrentContext(ctx)))
