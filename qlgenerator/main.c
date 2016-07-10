@@ -16,6 +16,10 @@
 #include "context.h"
 
 
+extern int QLMemoryUsedCritical;    // From QuickLook framework
+static const int kSatelliteMemory = 100 * 1024 * 1024; // Memory threshold for our QuickLookSatellite process
+
+
 // -----------------------------------------------------------------------------
 //	constants
 // -----------------------------------------------------------------------------
@@ -91,6 +95,10 @@ static QLGeneratorInterfaceStruct myInterfaceFtbl = {
 //
 QuickLookGeneratorPluginType *AllocQuickLookGeneratorPluginType(CFUUIDRef inFactoryID)
 {
+    // Hack! Give our process enough memory to handle large objects - e.g. X-Plane 10/Resources/default scenery/sim objects/dynamic/OilPlatform.obj
+    if (QLMemoryUsedCritical >= 0 && QLMemoryUsedCritical < kSatelliteMemory)
+        QLMemoryUsedCritical = kSatelliteMemory;
+
     QuickLookGeneratorPluginType *theNewInstance;
 
     theNewInstance = (QuickLookGeneratorPluginType *)malloc(sizeof(QuickLookGeneratorPluginType));
