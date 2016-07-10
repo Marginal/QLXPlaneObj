@@ -117,7 +117,7 @@ static	ObjDrawFuncs10_t sCallbacks =
 }
 
 
-- (CGImageRef) CreateImageWithSize:(CGSize)size;
+- (CGImageRef) newImageWithSize:(CGSize)size;
 {
     DrawInfo_t info = {};
     float	mins[3];

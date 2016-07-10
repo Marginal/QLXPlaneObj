@@ -215,11 +215,12 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     {
         // palletized FFS
         unsigned char palette[257 * 3];
-        unsigned *unpacked;
+        unsigned *unpacked = NULL;
         CFDataRef packed;
         if (!(unpacked = malloc(width * height * 4)) ||
             !(packed = CGDataProviderCopyData(CGImageGetDataProvider(image))))
         {
+            free(unpacked);
             CGImageRelease(image);
             return BlankTex();
         }

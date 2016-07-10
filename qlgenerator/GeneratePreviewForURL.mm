@@ -55,7 +55,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         else
             size = CGSizeMake(512, 512);    // Some other context - caller will resize
 
-        CGImageRef image = [obj CreateImageWithSize:size];
+        CGImageRef image = [obj newImageWithSize:render];
         if (!image || QLPreviewRequestIsCancelled(preview))
         {
             if (image)

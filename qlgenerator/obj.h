@@ -40,7 +40,7 @@ struct DrawInfo_t
 - (instancetype) initWithURL : (CFURLRef)url;
 + (instancetype) objWithURL : (CFURLRef)url;
 
-- (CGImageRef) CreateImageWithSize:(CGSize)size;
+- (CGImageRef) newImageWithSize:(CGSize)size;
 @end
 
 

@@ -40,7 +40,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
                        CGSizeMake(maxSize.width * scaleFactor.floatValue * 2, maxSize.height * scaleFactor.floatValue * 2) :
                        CGSizeMake(maxSize.width * 2, maxSize.height * 2));
 
-        CGImageRef image = [obj CreateImageWithSize:size];
+        CGImageRef image = [obj newImageWithSize:size];
         if (!image || QLThumbnailRequestIsCancelled(thumbnail))
         {
             if (image)
