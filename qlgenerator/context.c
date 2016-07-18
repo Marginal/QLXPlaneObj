@@ -26,8 +26,8 @@
 #include "context.h"
 
 static const float	vFOV = 30.f;
-static const GLsizei kMaxWidth = 1024;
-static const GLsizei kMaxHeight = 1024;
+static const GLsizei kMaxWidth = 2048;
+static const GLsizei kMaxHeight = 2048;
 
 #if APL
 static CGLContextObj ctx;
