@@ -50,7 +50,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
 
         /* Add an "OBJ" stamp if the thumbnail is not too small */
         NSDictionary *properties = (maxSize.height > 16 ?
-                                    @{ @"OBJ": (__bridge NSString *) kQLThumbnailPropertyExtensionKey} :
+                                    @{ (__bridge NSString *)kQLThumbnailPropertyExtensionKey: @"OBJ" } :
                                     NULL);
         QLThumbnailRequestSetImage(thumbnail, image, (__bridge CFDictionaryRef) properties);
 
