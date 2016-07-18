@@ -31,7 +31,12 @@ typedef NS_ENUM(NSInteger, QLPreviewMode)
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-    @autoreleasepool {
+    CGImageRef image;
+    CGSize size;
+    CGSize render;
+
+    @autoreleasepool
+    {
 #ifdef DEBUG
         NSLog(@"XPlaneOBJ UTI=%@ options=%@ %@", contentTypeUTI, options, url);
 #endif
@@ -49,9 +54,6 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             return kQLReturnNoError;
         }
 
-        CGSize size;
-        CGSize render;
-        NSDictionary *properties = NULL;
         if ([(NSNumber*)((__bridge NSDictionary*)options)[(__bridge NSString*)kQLPreviewOptionModeKey] intValue] == kQLPreviewQuicklookMode)
         {
             // Standard QuickLook view
@@ -64,23 +66,23 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             render = size = CGSizeMake(1024, 1024); // caller will downscale as necessary
         }
 
-        CGImageRef image = [obj newImageWithSize:render];
+        image = [obj newImageWithSize:render];
+
         if (!image || QLPreviewRequestIsCancelled(preview))
         {
             if (image)
                 CGImageRelease(image);
             return kQLReturnNoError;
         }
+    }   // Free XPlaneOBJ before handing back to QuickLook
 
-        CGContextRef context = QLPreviewRequestCreateContext(preview, size, true, NULL);
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height) , image);
-        QLPreviewRequestFlushContext(preview, context);
-        CGContextRelease(context);
+    CGContextRef context = QLPreviewRequestCreateContext(preview, size, true, NULL);
+    CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height) , image);
+    QLPreviewRequestFlushContext(preview, context);
+    CGContextRelease(context);
+    CGImageRelease(image);
 
-        CGImageRelease(image);
-
-        return kQLReturnNoError;
-    }
+    return kQLReturnNoError;
 }
 
 void CancelPreviewGeneration(void* thisInterface, QLPreviewRequestRef preview)

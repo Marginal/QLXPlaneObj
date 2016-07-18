@@ -15,7 +15,10 @@ extern "C"
 
 OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize)
 {
-    @autoreleasepool {
+    CGImageRef image;
+
+    @autoreleasepool
+    {
 #ifdef DEBUG
         NSLog(@"XPlaneOBJ UTI=%@ options=%@ size=%dx%d %@", contentTypeUTI, options, (int) maxSize.width, (int) maxSize.height, url);
 #endif
@@ -40,20 +43,22 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
                        CGSizeMake(maxSize.width * scaleFactor.floatValue * 2, maxSize.height * scaleFactor.floatValue * 2) :
                        CGSizeMake(maxSize.width * 2, maxSize.height * 2));
 
-        CGImageRef image = [obj newImageWithSize:size];
+        image = [obj newImageWithSize:size];
         if (!image || QLThumbnailRequestIsCancelled(thumbnail))
         {
             if (image)
                 CGImageRelease(image);
             return kQLReturnNoError;
         }
+    }   // Free XPlaneOBJ before handing back to QuickLook
 
+    @autoreleasepool
+    {
         /* Add an "OBJ" stamp if the thumbnail is not too small */
         NSDictionary *properties = (maxSize.height > 16 ?
                                     @{ (__bridge NSString *)kQLThumbnailPropertyExtensionKey: @"OBJ" } :
                                     NULL);
         QLThumbnailRequestSetImage(thumbnail, image, (__bridge CFDictionaryRef) properties);
-
         CGImageRelease(image);
 
         return kQLReturnNoError;
