@@ -23,7 +23,7 @@ typedef enum
 } TexRole;
 
 
-GLuint BlankTex();
+GLuint BlankTex(void);
 GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname);
 
 #endif /* tex_h */

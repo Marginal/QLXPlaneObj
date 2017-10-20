@@ -330,11 +330,10 @@ unsigned *context_read_buffer(size_t *width, size_t *height)
     glReadBuffer(GL_COLOR_ATTACHMENT0);
     glReadPixels(0, 0, img_width, img_height, GL_BGRA, GL_UNSIGNED_BYTE, img_data);
     // flip
-    unsigned *y0, *y1, stride = img_width;
-    for (unsigned *y0 = img_data, *y1 = img_data + ((img_height - 1) * stride); y0 < y1; y0 += stride, y1 -= stride)
+    for (unsigned *y0 = img_data, *y1 = img_data + ((img_height - 1) * img_width); y0 < y1; y0 += img_width, y1 -= img_width)
     {
         unsigned *x0, *x1, tmp;
-        for (x0 = y0, x1 = y1; x0 < y0 + stride; x0++, x1++)
+        for (x0 = y0, x1 = y1; x0 < y0 + img_width; x0++, x1++)
         {
             tmp = *x0;
             *x0 = *x1;
