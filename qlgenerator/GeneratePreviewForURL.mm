@@ -76,7 +76,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         }
     }   // Free XPlaneOBJ before handing back to QuickLook
 
-    CGContextRef context = QLPreviewRequestCreateContext(preview, size, true, NULL);
+    CGContextRef context = QLPreviewRequestCreateContext(preview, size, false, NULL);
     CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height) , image);
     QLPreviewRequestFlushContext(preview, context);
     CGContextRelease(context);
