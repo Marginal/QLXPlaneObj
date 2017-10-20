@@ -26,6 +26,9 @@ typedef NS_ENUM(NSInteger, QLPreviewMode)
     kQLPreviewUnknownMode	= 3,
     kQLPreviewSpotlightMode	= 4,	// Desktop Spotlight search popup bubble
     kQLPreviewQuicklookMode	= 5,	// File -> Quick Look in Finder (also qlmanage -p)
+    // From 10.13 High Sierra:
+    kQLPreviewHSQuicklookMode	= 6,	// File -> Quick Look in Finder (also qlmanage -p)
+    kQLPreviewHSSpotlightMode	= 9,	// Desktop Spotlight search context bubble
 };
 
 
@@ -54,7 +57,8 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
             return kQLReturnNoError;
         }
 
-        if ([(NSNumber*)((__bridge NSDictionary*)options)[(__bridge NSString*)kQLPreviewOptionModeKey] intValue] == kQLPreviewQuicklookMode)
+        QLPreviewMode previewMode = [((__bridge NSDictionary *)options)[(__bridge NSString *) kQLPreviewOptionModeKey] intValue];
+        if (previewMode == kQLPreviewQuicklookMode || previewMode == kQLPreviewHSQuicklookMode)
         {
             // Standard QuickLook view
             render = CGSizeMake(1600, 1200);        // render at this size
