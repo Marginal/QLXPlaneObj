@@ -235,7 +235,7 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         pngdata = CFDataCreateWithBytesNoCopy(NULL, (UInt8*) unpacked, width * height * 4, kCFAllocatorMalloc);
     }
     else if (colormodel != kCGColorSpaceModelRGB ||
-             (bpp != 24 && bpp != 32) ||
+             (bpp != 24 && bpp != 32 && bpp != 64) ||
              !(pngdata = CGDataProviderCopyData(CGImageGetDataProvider(image))))
     {
         NSLog(@"XPlaneObj: model:%d bpp:%zu %@", colormodel, bpp, pngfilename);
@@ -256,7 +256,10 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, bpp == 24 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, CFDataGetBytePtr(pngdata));
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
+                 bpp == 24 ? GL_RGB : GL_RGBA,
+                 bpp == 64 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_BYTE,
+                 CFDataGetBytePtr(pngdata));
     ASSERT_GL;
 
     filenames[role] = ddsfilename;
