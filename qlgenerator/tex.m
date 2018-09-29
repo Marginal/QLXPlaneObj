@@ -206,8 +206,8 @@ GLuint LoadTex(TexRole role, CFURLRef objname, const char *texname)
         return BlankTex();
 
     CFDataRef pngdata;
-    GLsizei width = CGImageGetWidth(image);
-    GLsizei height = CGImageGetHeight(image);
+    GLsizei width = (GLsizei) CGImageGetWidth(image);
+    GLsizei height = (GLsizei) CGImageGetHeight(image);
     CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
     CGColorSpaceModel colormodel = CGColorSpaceGetModel(colorspace);
     size_t bpp = CGImageGetBitsPerPixel(image);

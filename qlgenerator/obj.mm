@@ -54,7 +54,7 @@ static void	TexCoord(const float * st, void * ref)
 
 static void	TexCoordPointer(int size, unsigned long type, long stride, const void * pointer, void * ref)
 {
-    glTexCoordPointer(size, type, stride, pointer);
+    glTexCoordPointer(size, (GLenum) type, (GLsizei) stride, pointer);
 }
 
 static float GetAnimParam(const char * string, float v1, float v2, void * ref)

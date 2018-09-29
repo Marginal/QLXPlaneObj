@@ -99,8 +99,8 @@ int context_setup(int have_normals, GLsizei width, GLsizei height, float minCoor
                 CGLDescribeRenderer(rend, i, kCGLRPOffScreen, &os);
                 CGLDescribeRenderer(rend, i, kCGLRPColorModes, &cm);
                 CGLDescribeRenderer(rend, i, kCGLRPDepthModes, &dm);
-                CGLDescribeRenderer(rend, i, kCGLRPVideoMemory, &vm);
-                CGLDescribeRenderer(rend, i, kCGLRPTextureMemory, &tm);
+                CGLDescribeRenderer(rend, i, kCGLRPVideoMemoryMegabytes, &vm);
+                CGLDescribeRenderer(rend, i, kCGLRPTextureMemoryMegabytes, &tm);
                 syslog(LOG_NOTICE, "XPlaneObj: Renderer:%d, ID:0x%x, online:%d, displays:0x%x, accelerated:%d, off-screen:%d, colormodes:0x%08x, depthmodes:0x%08x, vmem:%d, tmem:%d", i, re & kCGLRendererIDMatchingMask, on, dp, ac, os, cm, dm, vm, tm);
             }
             CGLDestroyRendererInfo(rend);
