@@ -12,6 +12,7 @@
 #include <sys/syslog.h>
 
 #if APL
+# define GL_SILENCE_DEPRECATION // OpenGL is deprecated from macOS 10.9!
 # include <OpenGL/gl.h>
 # include <OpenGL/OpenGL.h>
 # include <OpenGL/CGLTypes.h>
