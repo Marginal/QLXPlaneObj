@@ -15,13 +15,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.6</string>
+	<string>1.0.7</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2016-2017 Jonathan Harris. Licensed under GPLv2 or later.</string>
+	<string>© 2016-2018 Jonathan Harris. Licensed under GPLv2 or later.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>UTImportedTypeDeclarations</key>
